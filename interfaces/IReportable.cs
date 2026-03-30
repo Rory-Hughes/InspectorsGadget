@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InspectorsGadget.models
+namespace InspectorsGadget.interfaces
 {
-    internal class ElectricalSystem
+    internal interface IReportable
     {
+        string GenerateReport();
+        void FlagCritical();
     }
 }
