@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InspectorsGadget.models
 {
-    internal class SafteyProtocol
+    // Requirement: Sealed Class - prevents further inheritance
+    public sealed class CriticalItem : 
     {
     }
 }

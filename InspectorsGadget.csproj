@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="data\" />
-    <Folder Include="helpers\" />
     <Folder Include="views\" />
   </ItemGroup>
 
