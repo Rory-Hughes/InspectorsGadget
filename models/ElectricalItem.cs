@@ -43,12 +43,10 @@ namespace InspectorsGadget.models
             return $"Electrical Item Report {GenerateSummary()} Notes: {Notes}";
         }
 
-        public void FlagCritical()
+        public CriticalItem FlagCritical(string flaggedBy)
         {
-            if (IsCritical)
-            {
-                AddNote("CRITICAL: Immediate electrical attention required!", true);
-            }
+            AddNote("CRITICAL: Immediate electrical attention required!", true);
+            return new CriticalItem(this, flaggedBy);
         }
     }
 }

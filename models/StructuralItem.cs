@@ -38,12 +38,10 @@ namespace InspectorsGadget.models
             return $"Structural Item Report {GenerateSummary()} Notes: {Notes}";
         }
 
-        public void FlagCritical()
+        public CriticalItem FlagCritical(string flaggedBy)
         {
-            if (IsCritical)
-            {
-                AddNote("CRITICAL: Structural integrity at risk, immediate attention required!", true);
-            }
+            AddNote("CRITICAL: Structural integrity at risk, immediate attention required!", true);
+            return new CriticalItem(this, flaggedBy);
         }
     }
 }
