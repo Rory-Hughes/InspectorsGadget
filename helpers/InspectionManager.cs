@@ -45,27 +45,40 @@ namespace InspectorsGadget.helpers
         {
             try
             {
-                var lines = Items.Select(i => i.GenerateSummary());
-                System.IO.File.WriteAllLines(filePath, lines);
+                var lines = Items.Select(i => i switch
+                {
+                    ElectricalItem e => $"Electrical,{e.ItemName},{e.RepairCost},{e.RiskLevel},{e.Notes},{e.AmpRating},{e.HasGrounding}",
+                    StructuralItem s => $"Structural,{s.ItemName},{s.RepairCost},{s.RiskLevel},{s.Notes},{s.HasVisibleCracks},{s.HasWaterDamage}",
+                    ApplianceItem a => $"Appliance,{a.ItemName},{a.RepairCost},{a.RiskLevel},{a.Notes},{a.AgeInYears},{a.IsOperational}",
+                    CriticalItem c => $"Critical,{c.Source.ItemName},{c.RepairCost},{c.RiskLevel},{c.Notes},{c.FlaggedBy},{c.FlaggedDate:yyyy-MM-dd}",
+                    _ => throw new InvalidOperationException($"Unknown type: {i.GetType().Name}")
+                });
+                File.WriteAllLines(filePath, lines);
             }
-            catch (System.IO.IOException ex)
-            {
-                // Surface this to the UI layer via a MessageBox
-                throw new Exception($"Failed to save inspection data: {ex.Message}");
-            }
+            catch (IOException ex) { throw new Exception($"Failed to save: {ex.Message}"); }
+
         }
 
         public static void LoadFromFile(string filePath)
         {
             try
             {
-                // TODO: Parse lines back into InspectionItem objects
-                var lines = System.IO.File.ReadAllLines(filePath);
+                Items.Clear();
+                foreach (var line in File.ReadAllLines(filePath))
+                {
+                    var p = line.Split(',');
+                    InspectionItem item = p[0] switch
+                    {
+                        "Electrical" => new ElectricalItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
+                        "Structural" => new StructuralItem(p[1], decimal.Parse(p[2]), bool.Parse(p[5]), bool.Parse(p[6])),
+                        "Appliance" => new ApplianceItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
+                        _ => throw new InvalidDataException($"Unknown item type: {p[0]}")
+                    };
+                    if (!string.IsNullOrWhiteSpace(p[4])) item.AddNote(p[4]);
+                    Items.Add(item);
+                }
             }
-            catch (System.IO.IOException ex)
-            {
-                throw new Exception($"Failed to load inspection data: {ex.Message}");
-            }
+            catch (IOException ex) { throw new Exception($"Failed to load: {ex.Message}"); }
         }
     }
 }
