@@ -7,23 +7,30 @@ using System.Threading.Tasks;
 namespace InspectorsGadget.models
 {
     // Requirement: Abstract Base Class
+    // Implements IComparable
     public abstract class InspectionItem : IComparable<InspectionItem>  
     {
         // Requirement : Encapsulation - private backing fields with Properties
         private string _itemName;
         private decimal _repairCost;
         private int _riskLevel;
-
+        
         public string ItemName
         {
             get => _itemName;
+            // when setting the item name we check if the value we are assigning is null or empty or just spaces
+            // if it is we throw an exception, otherwise we assign the value 
             set => _itemName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Item name cannot be null or empty.") : value;
         }
 
         public decimal RepairCost
         {
             get => _repairCost;
-            set => _repairCost = value < 0 ? throw new ArgumentOutOfRangeException(nameof(RepairCost), "Repair cost cannot be negative.") : value;
+            // checking if value is greater than 0, my thinking is obviously you cant have a negative cost, but you could have possibly a cost of zero.
+            // but in the case of a zero cost repair, that assumes something is an easy fix that practically any one could do in 10 minutes or less with no special tools
+            // and some instructions so for this reason im assuming the inspector would just write a note about how to fix it and not assign a cost to it
+            // hence why i am treating a zero cost as an invalid value for the repair cost
+            set => _repairCost = value <= 0 ? throw new ArgumentOutOfRangeException(nameof(RepairCost), "Repair cost cannot be negative or free.") : value;
         }
 
         public int RiskLevel
@@ -33,7 +40,7 @@ namespace InspectorsGadget.models
         }
 
         public bool IsCritical => RiskLevel >= 8; // Consider items with risk level 8 or higher as critical
-
+        // Auto-Implemented Property for notes
         public string Notes { get; set; } = string.Empty;
 
         // Constructor
@@ -49,17 +56,21 @@ namespace InspectorsGadget.models
         // Requirement: Method Overriding (virtual base for derived classes to override)
         public virtual string GenerateSummary()
         {
+            // Format the summary to include type name, item name, risk level, and repair cost
             return $"[{GetType().Name}] {ItemName} | Risk: {RiskLevel}/10 | Est. Cost: ${RepairCost:F2}";
         }
 
         // Requirement: Method Overloading - same method name, different signatures
         public void AddNote(string note)
         {
-            Notes = note;
+            // if this is the first note, just assign it; otherwise, append with a separator
+            // default behavior is to append notes, but if the user wants to overwrite existing notes they can use the overloaded method with the overwrite parameter set to true
+            Notes = string.IsNullOrWhiteSpace(Notes) ? note : Notes + " | " + note;
         }
 
         public void AddNote(string note, bool overwrite)
         {
+            // If overwrite is true, replace existing notes; otherwise, append with a separator
             Notes = overwrite ? note : Notes + " | " + note;
         }
 

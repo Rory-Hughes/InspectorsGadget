@@ -48,14 +48,14 @@ namespace InspectorsGadget.helpers
                 var lines = Items.Select(i => i.GenerateSummary());
                 System.IO.File.WriteAllLines(filePath, lines);
             }
-            catch (System.IO.IOException ex) 
+            catch (System.IO.IOException ex)
             {
                 // Surface this to the UI layer via a MessageBox
                 throw new Exception($"Failed to save inspection data: {ex.Message}");
             }
         }
 
-        public static void LoadFromFile(string filePath) 
+        public static void LoadFromFile(string filePath)
         {
             try
             {
@@ -67,4 +67,5 @@ namespace InspectorsGadget.helpers
                 throw new Exception($"Failed to load inspection data: {ex.Message}");
             }
         }
+    }
 }
