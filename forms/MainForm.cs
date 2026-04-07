@@ -62,14 +62,16 @@ namespace InspectorsGadget
 
         private void AddInspectionBtn_Click(object sender, EventArgs e)
         {
-            // TODO: Open AddItemForm dialog
-            MessageBox.Show("Add Inspection form not yet implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var addForm = new AddItemForm();
+            if (addForm.ShowDialog(this) == DialogResult.OK)
+            {
+                RefreshDashboard();
+            }
         }
 
         private void ViewReportBtn_Click(object sender, EventArgs e)
         {
-            // TODO: Open ReportForm dialog
-            MessageBox.Show("Report form not yet implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var reportForm = new ReportForm();
         }
 
         private void SettingsBtn_Click(object sender, EventArgs e)
