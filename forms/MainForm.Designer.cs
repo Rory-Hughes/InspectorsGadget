@@ -27,11 +27,11 @@
             lblCriticalIssues = new Label();
             lblItemsInspected = new Label();
             lblAvgRiskScore = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label1 = new Label();
+            lblCriticalTitle = new Label();
+            lblItemsTitle = new Label();
+            lblAvgTitle = new Label();
             lblTotalRepairCost = new Label();
-            label2 = new Label();
+            lblTotalTitle = new Label();
             itemGrid = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -85,7 +85,7 @@
             dashboardBtn.Name = "dashboardBtn";
             dashboardBtn.Size = new Size(144, 32);
             dashboardBtn.TabIndex = 1;
-            dashboardBtn.Text = "📊 Dashboard";
+            dashboardBtn.Text = "Dashboard";
             dashboardBtn.UseVisualStyleBackColor = false;
             dashboardBtn.Click += DashboardBtn_Click;
             // 
@@ -101,7 +101,7 @@
             addInspectionBtn.Name = "addInspectionBtn";
             addInspectionBtn.Size = new Size(144, 32);
             addInspectionBtn.TabIndex = 2;
-            addInspectionBtn.Text = "➕ Add Inspection";
+            addInspectionBtn.Text = "Add Inspection";
             addInspectionBtn.UseVisualStyleBackColor = false;
             addInspectionBtn.Click += AddInspectionBtn_Click;
             // 
@@ -117,7 +117,7 @@
             viewReportBtn.Name = "viewReportBtn";
             viewReportBtn.Size = new Size(144, 32);
             viewReportBtn.TabIndex = 3;
-            viewReportBtn.Text = "📄 View Report";
+            viewReportBtn.Text = "View Report";
             viewReportBtn.UseVisualStyleBackColor = false;
             viewReportBtn.Click += ViewReportBtn_Click;
             // 
@@ -133,7 +133,7 @@
             settingsBtn.Name = "settingsBtn";
             settingsBtn.Size = new Size(144, 32);
             settingsBtn.TabIndex = 4;
-            settingsBtn.Text = "⚙️ Settings";
+            settingsBtn.Text = "Settings";
             settingsBtn.UseVisualStyleBackColor = false;
             settingsBtn.Click += SettingsBtn_Click;
             // 
@@ -172,11 +172,11 @@
             metricsPanel.Controls.Add(lblCriticalIssues);
             metricsPanel.Controls.Add(lblItemsInspected);
             metricsPanel.Controls.Add(lblAvgRiskScore);
-            metricsPanel.Controls.Add(label4);
-            metricsPanel.Controls.Add(label3);
-            metricsPanel.Controls.Add(label1);
+            metricsPanel.Controls.Add(lblCriticalTitle);
+            metricsPanel.Controls.Add(lblItemsTitle);
+            metricsPanel.Controls.Add(lblAvgTitle);
             metricsPanel.Controls.Add(lblTotalRepairCost);
-            metricsPanel.Controls.Add(label2);
+            metricsPanel.Controls.Add(lblTotalTitle);
             metricsPanel.Location = new Point(16, 56);
             metricsPanel.Margin = new Padding(2);
             metricsPanel.Name = "metricsPanel";
@@ -185,71 +185,107 @@
             // 
             // lblCriticalIssues
             // 
-            lblCriticalIssues.AutoSize = true;
-            lblCriticalIssues.Location = new Point(536, 44);
+            lblCriticalIssues.BackColor = Color.FromArgb(245, 245, 245);
+            lblCriticalIssues.BorderStyle = BorderStyle.FixedSingle;
+            lblCriticalIssues.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblCriticalIssues.ForeColor = Color.FromArgb(192, 57, 43);
+            lblCriticalIssues.Location = new Point(470, 31);
             lblCriticalIssues.Name = "lblCriticalIssues";
-            lblCriticalIssues.Size = new Size(0, 20);
+            lblCriticalIssues.Size = new Size(154, 57);
             lblCriticalIssues.TabIndex = 7;
+            lblCriticalIssues.Text = "0";
+            lblCriticalIssues.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblItemsInspected
             // 
-            lblItemsInspected.AutoSize = true;
-            lblItemsInspected.Location = new Point(362, 45);
+            lblItemsInspected.BackColor = Color.FromArgb(245, 245, 245);
+            lblItemsInspected.BorderStyle = BorderStyle.FixedSingle;
+            lblItemsInspected.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblItemsInspected.ForeColor = Color.FromArgb(52, 152, 219);
+            lblItemsInspected.Location = new Point(309, 31);
             lblItemsInspected.Name = "lblItemsInspected";
-            lblItemsInspected.Size = new Size(0, 20);
+            lblItemsInspected.Size = new Size(154, 57);
             lblItemsInspected.TabIndex = 6;
+            lblItemsInspected.Text = "0";
+            lblItemsInspected.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblAvgRiskScore
             // 
-            lblAvgRiskScore.AutoSize = true;
-            lblAvgRiskScore.Location = new Point(192, 45);
+            lblAvgRiskScore.BackColor = Color.FromArgb(245, 245, 245);
+            lblAvgRiskScore.BorderStyle = BorderStyle.FixedSingle;
+            lblAvgRiskScore.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblAvgRiskScore.ForeColor = Color.FromArgb(230, 126, 34);
+            lblAvgRiskScore.Location = new Point(155, 31);
             lblAvgRiskScore.Name = "lblAvgRiskScore";
-            lblAvgRiskScore.Size = new Size(0, 20);
+            lblAvgRiskScore.Size = new Size(148, 57);
             lblAvgRiskScore.TabIndex = 5;
+            lblAvgRiskScore.Text = "0.0 / 10";
+            lblAvgRiskScore.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lblCriticalTitle
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(503, 9);
-            label4.Name = "label4";
-            label4.Size = new Size(100, 20);
-            label4.TabIndex = 4;
-            label4.Text = "Critical Issues:";
+            lblCriticalTitle.BackColor = Color.FromArgb(245, 245, 245);
+            lblCriticalTitle.BorderStyle = BorderStyle.FixedSingle;
+            lblCriticalTitle.Font = new Font("Segoe UI", 9F);
+            lblCriticalTitle.ForeColor = Color.FromArgb(100, 100, 100);
+            lblCriticalTitle.Location = new Point(470, 0);
+            lblCriticalTitle.Name = "lblCriticalTitle";
+            lblCriticalTitle.Size = new Size(154, 31);
+            lblCriticalTitle.TabIndex = 4;
+            lblCriticalTitle.Text = "Critical Issues:";
+            lblCriticalTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // lblItemsTitle
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(326, 9);
-            label3.Name = "label3";
-            label3.Size = new Size(116, 20);
-            label3.TabIndex = 3;
-            label3.Text = "Items Inspected:";
+            lblItemsTitle.BackColor = Color.FromArgb(245, 245, 245);
+            lblItemsTitle.BorderStyle = BorderStyle.FixedSingle;
+            lblItemsTitle.Font = new Font("Segoe UI", 9F);
+            lblItemsTitle.ForeColor = Color.FromArgb(100, 100, 100);
+            lblItemsTitle.Location = new Point(309, 0);
+            lblItemsTitle.Name = "lblItemsTitle";
+            lblItemsTitle.Size = new Size(154, 31);
+            lblItemsTitle.TabIndex = 3;
+            lblItemsTitle.Text = "Items Inspected:";
+            lblItemsTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // lblAvgTitle
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(171, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(109, 20);
-            label1.TabIndex = 2;
-            label1.Text = "Avg Risk Score:";
+            lblAvgTitle.BackColor = Color.FromArgb(245, 245, 245);
+            lblAvgTitle.BorderStyle = BorderStyle.FixedSingle;
+            lblAvgTitle.Font = new Font("Segoe UI", 9F);
+            lblAvgTitle.ForeColor = Color.FromArgb(100, 100, 100);
+            lblAvgTitle.Location = new Point(155, 0);
+            lblAvgTitle.Name = "lblAvgTitle";
+            lblAvgTitle.Size = new Size(148, 31);
+            lblAvgTitle.TabIndex = 2;
+            lblAvgTitle.Text = "Avg Risk Score:";
+            lblAvgTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTotalRepairCost
             // 
-            lblTotalRepairCost.AutoSize = true;
-            lblTotalRepairCost.Location = new Point(35, 45);
+            lblTotalRepairCost.BackColor = Color.FromArgb(245, 245, 245);
+            lblTotalRepairCost.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalRepairCost.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblTotalRepairCost.ForeColor = Color.FromArgb(0, 105, 111);
+            lblTotalRepairCost.Location = new Point(0, 31);
             lblTotalRepairCost.Name = "lblTotalRepairCost";
-            lblTotalRepairCost.Size = new Size(0, 20);
+            lblTotalRepairCost.Size = new Size(146, 57);
             lblTotalRepairCost.TabIndex = 1;
+            lblTotalRepairCost.Text = "0$";
+            lblTotalRepairCost.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // lblTotalTitle
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 9);
-            label2.Name = "label2";
-            label2.Size = new Size(125, 20);
-            label2.TabIndex = 0;
-            label2.Text = "Total Repair Cost:";
+            lblTotalTitle.BackColor = Color.FromArgb(245, 245, 245);
+            lblTotalTitle.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalTitle.Font = new Font("Segoe UI", 9F);
+            lblTotalTitle.ForeColor = Color.FromArgb(100, 100, 100);
+            lblTotalTitle.Location = new Point(0, 0);
+            lblTotalTitle.Name = "lblTotalTitle";
+            lblTotalTitle.Size = new Size(146, 31);
+            lblTotalTitle.TabIndex = 0;
+            lblTotalTitle.Text = "Total Repair Cost:";
+            lblTotalTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // itemGrid
             // 
@@ -303,7 +339,7 @@
             refreshBtn.Location = new Point(560, 416);
             refreshBtn.Margin = new Padding(2);
             refreshBtn.Name = "refreshBtn";
-            refreshBtn.Size = new Size(80, 28);
+            refreshBtn.Size = new Size(80, 32);
             refreshBtn.TabIndex = 3;
             refreshBtn.Text = "🔄 Refresh";
             refreshBtn.UseVisualStyleBackColor = false;
@@ -319,7 +355,7 @@
             exportBtn.Location = new Point(472, 416);
             exportBtn.Margin = new Padding(2);
             exportBtn.Name = "exportBtn";
-            exportBtn.Size = new Size(80, 28);
+            exportBtn.Size = new Size(80, 32);
             exportBtn.TabIndex = 4;
             exportBtn.Text = "💾 Save";
             exportBtn.UseVisualStyleBackColor = false;
@@ -341,37 +377,10 @@
             contentPanel.ResumeLayout(false);
             contentPanel.PerformLayout();
             metricsPanel.ResumeLayout(false);
-            metricsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)itemGrid).EndInit();
             ResumeLayout(false);
         }
 
-        private void CreateMetricCard(Panel parent, int x, int y, string title, string value, Color accentColor)
-        {
-            Panel card = new Panel();
-            card.Location = new Point(x, y);
-            card.Size = new Size(180, 90);
-            card.BackColor = Color.FromArgb(245, 245, 245);
-            card.BorderStyle = BorderStyle.FixedSingle;
-            parent.Controls.Add(card);
-
-            Label titleLabel = new Label();
-            titleLabel.Text = title;
-            titleLabel.Font = new Font("Segoe UI", 9F);
-            titleLabel.ForeColor = Color.FromArgb(100, 100, 100);
-            titleLabel.Location = new Point(10, 10);
-            titleLabel.AutoSize = true;
-            card.Controls.Add(titleLabel);
-
-            Label valueLabel = new Label();
-            valueLabel.Text = value;
-            valueLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            valueLabel.ForeColor = accentColor;
-            valueLabel.Location = new Point(10, 35);
-            valueLabel.AutoSize = true;
-            valueLabel.Name = $"Value_{title.Replace(" ", "")}";
-            card.Controls.Add(valueLabel);
-        }
 
         #region Designer Fields
 
@@ -390,15 +399,15 @@
 
         #endregion
 
-        private Label label2;
+        private Label lblTotalTitle;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private Label lblTotalRepairCost;
-        private Label label1;
-        private Label label3;
-        private Label label4;
+        private Label lblAvgTitle;
+        private Label lblItemsTitle;
+        private Label lblCriticalTitle;
         private Label lblCriticalIssues;
         private Label lblItemsInspected;
         private Label lblAvgRiskScore;

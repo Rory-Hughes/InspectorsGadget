@@ -26,9 +26,7 @@ namespace InspectorsGadget
 
                 // Update metric labels
                 lblTotalRepairCost.Text = $"${totalCost:F2}";
-                lblTotalRepairCost.ForeColor = totalCost > 1000 ? Color.Red : Color.Green;
                 lblAvgRiskScore.Text = $"{avgRisk:F1} / 10";
-                lblAvgRiskScore.ForeColor = avgRisk > 7 ? Color.Red : Color.Green;
                 lblItemsInspected.Text = itemCount.ToString();
                 lblCriticalIssues.Text = criticalCount.ToString();
 
