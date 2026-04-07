@@ -25,10 +25,12 @@ namespace InspectorsGadget
                 int criticalCount = InspectionManager.GetCriticalItems().Count;
 
                 // Update metric labels
-                UpdateMetricLabel("Total Repair Cost", $"${totalCost:F2}");
-                UpdateMetricLabel("Avg Risk Score", $"{avgRisk:F1} / 10");
-                UpdateMetricLabel("Items Inspected", itemCount.ToString());
-                UpdateMetricLabel("Critical Issues", criticalCount.ToString());
+                lblTotalRepairCost.Text = $"${totalCost:F2}";
+                lblTotalRepairCost.ForeColor = totalCost > 1000 ? Color.Red : Color.Green;
+                lblAvgRiskScore.Text = $"{avgRisk:F1} / 10";
+                lblAvgRiskScore.ForeColor = avgRisk > 7 ? Color.Red : Color.Green;
+                lblItemsInspected.Text = itemCount.ToString();
+                lblCriticalIssues.Text = criticalCount.ToString();
 
                 // Populate grid
                 itemGrid.Rows.Clear();
@@ -45,16 +47,6 @@ namespace InspectorsGadget
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void UpdateMetricLabel(string metricName, string value)
-        {
-            string labelName = $"Value_{metricName.Replace(" ", "")}";
-            var label = metricsPanel.Controls.OfType<Label>().FirstOrDefault(l => l.Name == labelName);
-            if (label != null)
-            {
-                label.Text = value;
             }
         }
 
