@@ -22,6 +22,7 @@
             viewReportBtn = new Button();
             settingsBtn = new Button();
             contentPanel = new Panel();
+            btnClearAll = new Button();
             headerLabel = new Label();
             metricsPanel = new Panel();
             lblCriticalIssues = new Label();
@@ -39,6 +40,7 @@
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             refreshBtn = new Button();
             exportBtn = new Button();
+            btnDeleteItem = new Button();
             sidebarPanel.SuspendLayout();
             contentPanel.SuspendLayout();
             metricsPanel.SuspendLayout();
@@ -140,6 +142,8 @@
             // contentPanel
             // 
             contentPanel.BackColor = Color.White;
+            contentPanel.Controls.Add(btnDeleteItem);
+            contentPanel.Controls.Add(btnClearAll);
             contentPanel.Controls.Add(headerLabel);
             contentPanel.Controls.Add(metricsPanel);
             contentPanel.Controls.Add(itemGrid);
@@ -152,6 +156,22 @@
             contentPanel.Padding = new Padding(16);
             contentPanel.Size = new Size(659, 480);
             contentPanel.TabIndex = 0;
+            // 
+            // btnClearAll
+            // 
+            btnClearAll.BackColor = Color.IndianRed;
+            btnClearAll.Cursor = Cursors.Hand;
+            btnClearAll.FlatStyle = FlatStyle.Flat;
+            btnClearAll.Font = new Font("Segoe UI", 10F);
+            btnClearAll.ForeColor = Color.White;
+            btnClearAll.Location = new Point(392, 416);
+            btnClearAll.Margin = new Padding(2);
+            btnClearAll.Name = "btnClearAll";
+            btnClearAll.Size = new Size(80, 32);
+            btnClearAll.TabIndex = 5;
+            btnClearAll.Text = "Clear All";
+            btnClearAll.UseVisualStyleBackColor = false;
+            btnClearAll.Click += btnClearAll_Click;
             // 
             // headerLabel
             // 
@@ -341,7 +361,7 @@
             refreshBtn.Name = "refreshBtn";
             refreshBtn.Size = new Size(80, 32);
             refreshBtn.TabIndex = 3;
-            refreshBtn.Text = "🔄 Refresh";
+            refreshBtn.Text = "Refresh";
             refreshBtn.UseVisualStyleBackColor = false;
             refreshBtn.Click += RefreshBtn_Click;
             // 
@@ -352,14 +372,29 @@
             exportBtn.FlatStyle = FlatStyle.Flat;
             exportBtn.Font = new Font("Segoe UI", 10F);
             exportBtn.ForeColor = Color.White;
-            exportBtn.Location = new Point(472, 416);
+            exportBtn.Location = new Point(476, 416);
             exportBtn.Margin = new Padding(2);
             exportBtn.Name = "exportBtn";
             exportBtn.Size = new Size(80, 32);
             exportBtn.TabIndex = 4;
-            exportBtn.Text = "💾 Save";
+            exportBtn.Text = "Save";
             exportBtn.UseVisualStyleBackColor = false;
             exportBtn.Click += ExportBtn_Click;
+            // 
+            // btnDeleteItem
+            // 
+            btnDeleteItem.BackColor = Color.Brown;
+            btnDeleteItem.Cursor = Cursors.Hand;
+            btnDeleteItem.FlatStyle = FlatStyle.Flat;
+            btnDeleteItem.Font = new Font("Segoe UI", 10F);
+            btnDeleteItem.ForeColor = Color.White;
+            btnDeleteItem.Location = new Point(270, 416);
+            btnDeleteItem.Margin = new Padding(2);
+            btnDeleteItem.Name = "btnDeleteItem";
+            btnDeleteItem.Size = new Size(118, 32);
+            btnDeleteItem.TabIndex = 7;
+            btnDeleteItem.Text = "Delete Item";
+            btnDeleteItem.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
@@ -411,5 +446,7 @@
         private Label lblCriticalIssues;
         private Label lblItemsInspected;
         private Label lblAvgRiskScore;
+        private Button btnClearAll;
+        private Button btnDeleteItem;
     }
 }

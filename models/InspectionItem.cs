@@ -36,6 +36,7 @@ namespace InspectorsGadget.models
         public int RiskLevel
         {
             get => _riskLevel;
+            // when setting the risk level we want to ensure that the value is between 1 and 10, so we use Math.Clamp to restrict the value to this range.
             protected set => _riskLevel = Math.Clamp(value, 1, 10); // Ensure risk level is between 1 and 10
         }
 
@@ -46,6 +47,7 @@ namespace InspectorsGadget.models
         // Constructor
         protected InspectionItem(string itemName, decimal repairCost)
         {
+            // When creating a new inspection item, we want to ensure that the item name and repair cost are valid, so we use the property setters which include validation logic to assign these values.
             ItemName = itemName;
             RepairCost = repairCost;
         }
@@ -87,6 +89,7 @@ namespace InspectorsGadget.models
             return RiskLevel.CompareTo(other.RiskLevel); // Sort by risk level
         }
 
+        // Override ToString to provide a meaningful string representation of the inspection item
         public override string ToString()
         {
             return GenerateSummary();

@@ -13,6 +13,7 @@ namespace InspectorsGadget.models
         public int AmpRating { get; set; }
         public bool HasGrounding { get; set; }
 
+        // Constructor that initializes base properties and specific properties for ElectricalItem
         public ElectricalItem(string itemName, decimal repairCost, int ampRating, bool hasGrounding)
             : base(itemName, repairCost)
         {
@@ -31,6 +32,7 @@ namespace InspectorsGadget.models
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 
+        // Override the GenerateSummary method to include specific details about the electrical item
         public override string GenerateSummary()
         {
             
@@ -43,6 +45,7 @@ namespace InspectorsGadget.models
             return $"Electrical Item Report {GenerateSummary()} Notes: {Notes}";
         }
 
+        // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
         public CriticalItem FlagCritical(string flaggedBy)
         {
             AddNote("CRITICAL: Immediate electrical attention required!", true);

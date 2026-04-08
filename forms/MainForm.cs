@@ -1,5 +1,6 @@
 using InspectorsGadget.helpers;
 using InspectorsGadget.models;
+using System;
 
 namespace InspectorsGadget
 {
@@ -83,6 +84,12 @@ namespace InspectorsGadget
             {
                 MessageBox.Show($"Error saving data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            InspectionManager.ResetFile("inspections.csv");
+            RefreshDashboard();
         }
     }
 }
