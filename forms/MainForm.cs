@@ -1,6 +1,8 @@
+using InspectorsGadget.forms;
 using InspectorsGadget.helpers;
 using InspectorsGadget.models;
 using System;
+using System.Threading.Channels;
 
 namespace InspectorsGadget
 {
@@ -130,6 +132,37 @@ namespace InspectorsGadget
 
         private void btnEditItem_Click(object sender, EventArgs e)
         {
+            // Guard: require a selected row.
+            if (itemGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an item to edit.", "No Selection",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Column 0 holds ItemName — matches how rows are built in RefreshDashboard.
+            string selectedName = itemGrid.SelectedRows[0].Cells[0].Value?.ToString();
+            var itemToEdit = InspectionManager.Items.FirstOrDefault(i => i.ItemName == selectedName);
+
+            if (itemToEdit == null)
+            {
+                MessageBox.Show("Selected item not found in the data list.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // CriticalItems are decorator wrappers — direct editing isn't supported.
+            if (itemToEdit is CriticalItem)
+            {
+                MessageBox.Show("Critical items cannot be edited directly. Delete and re - add the item if changes are needed.", "Cannot Edit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var editForm = new EditItemForm(itemToEdit);
+            if (editForm.ShowDialog(this) == DialogResult.OK)
+            {
+                RefreshDashboard();
+            }
 
         }
     }
