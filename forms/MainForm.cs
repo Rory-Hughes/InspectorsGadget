@@ -11,7 +11,7 @@ namespace InspectorsGadget
     {
         // Tracks the active file so Save, Save As, and Load all stay in sync.
         // Defaults to the original fixed path so existing data is found on startup.
-        private string _currentFilePath = "inspections.csv";
+        private string _currentFilePath;
 
         // ── Constructor now receives the path chosen on the startup screen ────
         public MainForm(string filePath)
