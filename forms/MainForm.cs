@@ -1,4 +1,4 @@
-using InspectorsGadget.forms;
+﻿using InspectorsGadget.forms;
 using InspectorsGadget.helpers;
 using InspectorsGadget.models;
 using System;
@@ -13,9 +13,11 @@ namespace InspectorsGadget
         // Defaults to the original fixed path so existing data is found on startup.
         private string _currentFilePath = "inspections.csv";
 
-        public MainForm()
+        // ── Constructor now receives the path chosen on the startup screen ────
+        public MainForm(string filePath)
         {
             InitializeComponent();
+            _currentFilePath = filePath;
             RefreshDashboard();
         }
 
@@ -66,7 +68,7 @@ namespace InspectorsGadget
         private void UpdateTitleBar()
         {
             string fileName = Path.GetFileNameWithoutExtension(_currentFilePath);
-            this.Text = $"InspectorsGadget � {fileName}";
+            this.Text = $"InspectorsGadget — {fileName}";
         }
 
         // doesnt do anything yet but we want to have it there for when we implement the dashboard view with charts and graphs and stuff, so we can just switch to that view when the button is clicked
@@ -93,7 +95,7 @@ namespace InspectorsGadget
                 return;
             }
 
-            // Column 0 holds ItemName � matches how rows are built in RefreshDashboard.
+            // Column 0 holds ItemName — matches how rows are built in RefreshDashboard.
             string selectedName = itemGrid.SelectedRows[0].Cells[0].Value?.ToString();
             var itemToEdit = InspectionManager.Items.FirstOrDefault(i => i.ItemName == selectedName);
 
@@ -104,7 +106,7 @@ namespace InspectorsGadget
                 return;
             }
 
-            // CriticalItems are decorator wrappers � direct editing isn't supported.
+            // CriticalItems are decorator wrappers — direct editing isn't supported.
             if (itemToEdit is CriticalItem)
             {
                 MessageBox.Show("Critical items cannot be edited directly. \nDelete and re - add the item if changes are needed.", "Cannot Edit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -160,7 +162,7 @@ namespace InspectorsGadget
             MessageBox.Show("Settings form not yet implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // ??? File: Browse & Load ??????????????????????????????????????????????
+        // ─── File: Browse & Load ──────────────────────────────────────────────
         // Opens an OpenFileDialog so the user can pick any previously saved report.
         // The loaded file becomes the active file for subsequent saves.
         private void BtnLoadFile_Click(object sender, EventArgs e)
@@ -178,7 +180,7 @@ namespace InspectorsGadget
             {
                 try
                 {
-                    // Update the path first � RefreshDashboard reads _currentFilePath.
+                    // Update the path first — RefreshDashboard reads _currentFilePath.
                     _currentFilePath = dlg.FileName;
                     RefreshDashboard();
                 }
@@ -190,7 +192,7 @@ namespace InspectorsGadget
             }
         }
 
-        // ??? File: Save ???????????????????????????????????????????????????????
+        // ─── File: Save ───────────────────────────────────────────────────────
         // Saves to whatever file is currently active (defaulting to inspections.csv).
         // After the user has done a Save As, subsequent saves go to the new path.
         private void BtnSave_Click(object sender, EventArgs e)
@@ -212,7 +214,7 @@ namespace InspectorsGadget
 
 
 
-        // ??? File: Save As ????????????????????????????????????????????????????
+        // ─── File: Save As ────────────────────────────────────────────────────
         // Opens a SaveFileDialog so the user can name the report and choose a location.
         // The chosen path becomes the new active file for subsequent saves.
         private void btnSaveAs_Click(object sender, EventArgs e)

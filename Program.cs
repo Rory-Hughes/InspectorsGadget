@@ -2,16 +2,18 @@ namespace InspectorsGadget
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+
+            // Show the startup/welcome screen before opening MainForm.
+            // If the user closes it without confirming, the application exits cleanly.
+            using var startup = new StartupForm2();
+            if (startup.ShowDialog() != DialogResult.OK)
+                return;
+
+            Application.Run(new MainForm(startup.SelectedFilePath));
         }
     }
 }
