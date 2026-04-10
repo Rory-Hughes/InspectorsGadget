@@ -32,17 +32,16 @@
             mainPanel.Controls.Add(closeBtn);
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(16, 16);
-            mainPanel.Margin = new Padding(2, 2, 2, 2);
+            mainPanel.Margin = new Padding(2);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(569, 463);
+            mainPanel.Size = new Size(1361, 905);
             mainPanel.TabIndex = 0;
             // 
             // headerLabel
             // 
-            headerLabel.AutoSize = true;
             headerLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             headerLabel.ForeColor = Color.FromArgb(33, 37, 41);
-            headerLabel.Location = new Point(16, 16);
+            headerLabel.Location = new Point(489, 12);
             headerLabel.Margin = new Padding(2, 0, 2, 0);
             headerLabel.Name = "headerLabel";
             headerLabel.Size = new Size(327, 32);
@@ -53,12 +52,12 @@
             // 
             reportTextBox.Font = new Font("Courier New", 9F);
             reportTextBox.Location = new Point(16, 56);
-            reportTextBox.Margin = new Padding(2, 2, 2, 2);
+            reportTextBox.Margin = new Padding(2);
             reportTextBox.Multiline = true;
             reportTextBox.Name = "reportTextBox";
             reportTextBox.ReadOnly = true;
             reportTextBox.ScrollBars = ScrollBars.Vertical;
-            reportTextBox.Size = new Size(521, 321);
+            reportTextBox.Size = new Size(1312, 780);
             reportTextBox.TabIndex = 1;
             // 
             // sendReportBtn
@@ -67,8 +66,8 @@
             sendReportBtn.Cursor = Cursors.Hand;
             sendReportBtn.FlatStyle = FlatStyle.Flat;
             sendReportBtn.ForeColor = Color.White;
-            sendReportBtn.Location = new Point(424, 392);
-            sendReportBtn.Margin = new Padding(2, 2, 2, 2);
+            sendReportBtn.Location = new Point(1216, 852);
+            sendReportBtn.Margin = new Padding(2);
             sendReportBtn.Name = "sendReportBtn";
             sendReportBtn.Size = new Size(112, 28);
             sendReportBtn.TabIndex = 2;
@@ -83,8 +82,8 @@
             closeBtn.DialogResult = DialogResult.Cancel;
             closeBtn.FlatStyle = FlatStyle.Flat;
             closeBtn.ForeColor = Color.White;
-            closeBtn.Location = new Point(304, 392);
-            closeBtn.Margin = new Padding(2, 2, 2, 2);
+            closeBtn.Location = new Point(1096, 852);
+            closeBtn.Margin = new Padding(2);
             closeBtn.Name = "closeBtn";
             closeBtn.Size = new Size(112, 28);
             closeBtn.TabIndex = 3;
@@ -96,14 +95,14 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeBtn;
-            ClientSize = new Size(601, 495);
+            ClientSize = new Size(1393, 937);
             Controls.Add(mainPanel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ReportForm";
-            Padding = new Padding(16, 16, 16, 16);
+            Padding = new Padding(16);
             StartPosition = FormStartPosition.CenterParent;
             Text = "Property Inspection Report";
             mainPanel.ResumeLayout(false);

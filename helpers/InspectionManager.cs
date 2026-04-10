@@ -98,6 +98,8 @@ namespace InspectorsGadget.helpers
             }
             catch (IOException ex) { throw new Exception($"Failed to load: {ex.Message}"); }
         }
+        
+        public static void RemoveItem(InspectionItem item) => Items.Remove(item); // Utility method to remove items from the list
 
         // The ResetFile method clears the current list of inspection items and attempts to save an empty list to the specified file path. It also uses a try-catch block to handle potential IOExceptions that may occur during file writing operations.
         public static void ResetFile(string filePath)

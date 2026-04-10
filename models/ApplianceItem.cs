@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InspectorsGadget.interfaces;
 
 namespace InspectorsGadget.models
 {
-    public class ApplianceItem : InspectionItem
+    public class ApplianceItem : InspectionItem, IReportable
     {
         public int AgeInYears { get; set; }
         public bool IsOperational { get; set; }
@@ -30,6 +31,19 @@ namespace InspectorsGadget.models
         public override string GenerateSummary()
         {
             return base.GenerateSummary() + $" | Age: {AgeInYears} years | Operational: {IsOperational}";
+        }
+
+        // Requirement: IReportable Interface
+        public string GenerateReport()
+        {
+            return $"Appliance Item Report {GenerateSummary()} Notes: {Notes}";
+        }
+
+        // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
+        public CriticalItem FlagCritical(string flaggedBy)
+        {
+            AddNote("CRITICAL: Repair or replace appliance as soon as possible!", true);
+            return new CriticalItem(this, flaggedBy);
         }
     }
 }

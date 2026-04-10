@@ -26,8 +26,8 @@ namespace InspectorsGadget.models
 
         public override int CalculateRisk()
         {
-            int risk = HasGrounding ? 2 : 7; // Base risk level
-            if (AmpRating > 200) risk += 2; // Higher amp rating increases risk
+            int risk = 1; // Base risk level
+            if (AmpRating > 25) risk += 3; // Higher amp rating increases risk
             if (!HasGrounding) risk += 4; // Lack of grounding significantly increases risk
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }

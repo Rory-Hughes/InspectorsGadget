@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace InspectorsGadget.models
 {
     // Requirement: Sealed Class - prevents further inheritance
-    // Uses composition so any InspectionItem type can be glagged as critical without needing to modify the base class or derived classes
+    // Uses composition so any InspectionItem type can be flagged as critical without needing to modify the base class or derived classes
     public sealed class CriticalItem : InspectionItem
     {
         // Holds a reference to the original item that is flagged as critical
