@@ -22,6 +22,8 @@
             btnViewReport = new Button();
             btnSettings = new Button();
             contentPanel = new Panel();
+            btnSaveAs = new Button();
+            btnEditItem = new Button();
             btnDeleteItem = new Button();
             headerLabel = new Label();
             metricsPanel = new Panel();
@@ -38,7 +40,7 @@
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            btnRefresh = new Button();
+            btnLoadFile = new Button();
             btnSave = new Button();
             sidebarPanel.SuspendLayout();
             contentPanel.SuspendLayout();
@@ -141,11 +143,13 @@
             // contentPanel
             // 
             contentPanel.BackColor = Color.White;
+            contentPanel.Controls.Add(btnSaveAs);
+            contentPanel.Controls.Add(btnEditItem);
             contentPanel.Controls.Add(btnDeleteItem);
             contentPanel.Controls.Add(headerLabel);
             contentPanel.Controls.Add(metricsPanel);
             contentPanel.Controls.Add(itemGrid);
-            contentPanel.Controls.Add(btnRefresh);
+            contentPanel.Controls.Add(btnLoadFile);
             contentPanel.Controls.Add(btnSave);
             contentPanel.Dock = DockStyle.Fill;
             contentPanel.Location = new Point(160, 0);
@@ -155,14 +159,42 @@
             contentPanel.Size = new Size(988, 642);
             contentPanel.TabIndex = 0;
             // 
+            // btnSaveAs
+            // 
+            btnSaveAs.BackColor = Color.FromArgb(52, 152, 219);
+            btnSaveAs.Cursor = Cursors.Hand;
+            btnSaveAs.FlatStyle = FlatStyle.Flat;
+            btnSaveAs.Font = new Font("Segoe UI", 10F);
+            btnSaveAs.ForeColor = Color.White;
+            btnSaveAs.Location = new Point(561, 592);
+            btnSaveAs.Margin = new Padding(2);
+            btnSaveAs.Name = "btnSaveAs";
+            btnSaveAs.Size = new Size(133, 32);
+            btnSaveAs.TabIndex = 9;
+            btnSaveAs.Text = "Save File As...";
+            btnSaveAs.UseVisualStyleBackColor = false;
+            btnSaveAs.Click += btnSaveAs_Click;
+            // 
+            // btnEditItem
+            // 
+            btnEditItem.BackColor = Color.Goldenrod;
+            btnEditItem.Location = new Point(16, 593);
+            btnEditItem.Name = "btnEditItem";
+            btnEditItem.Size = new Size(133, 32);
+            btnEditItem.TabIndex = 8;
+            btnEditItem.Text = "Edit Item";
+            btnEditItem.UseVisualStyleBackColor = false;
+            btnEditItem.Click += btnEditItem_Click;
+            // 
             // btnDeleteItem
             // 
             btnDeleteItem.BackColor = Color.Brown;
             btnDeleteItem.Cursor = Cursors.Hand;
-            btnDeleteItem.FlatStyle = FlatStyle.Flat;
+            btnDeleteItem.FlatAppearance.BorderColor = Color.Black;
+            btnDeleteItem.FlatAppearance.BorderSize = 2;
             btnDeleteItem.Font = new Font("Segoe UI", 10F);
             btnDeleteItem.ForeColor = Color.White;
-            btnDeleteItem.Location = new Point(561, 592);
+            btnDeleteItem.Location = new Point(154, 593);
             btnDeleteItem.Margin = new Padding(2);
             btnDeleteItem.Name = "btnDeleteItem";
             btnDeleteItem.Size = new Size(133, 32);
@@ -349,21 +381,21 @@
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.Width = 200;
             // 
-            // btnRefresh
+            // btnLoadFile
             // 
-            btnRefresh.BackColor = Color.FromArgb(0, 105, 111);
-            btnRefresh.Cursor = Cursors.Hand;
-            btnRefresh.FlatStyle = FlatStyle.Flat;
-            btnRefresh.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(835, 592);
-            btnRefresh.Margin = new Padding(2);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(133, 32);
-            btnRefresh.TabIndex = 3;
-            btnRefresh.Text = "⟳ Refresh";
-            btnRefresh.UseVisualStyleBackColor = false;
-            btnRefresh.Click += BtnRefresh_Click;
+            btnLoadFile.BackColor = Color.FromArgb(0, 105, 111);
+            btnLoadFile.Cursor = Cursors.Hand;
+            btnLoadFile.FlatStyle = FlatStyle.Flat;
+            btnLoadFile.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLoadFile.ForeColor = Color.White;
+            btnLoadFile.Location = new Point(835, 592);
+            btnLoadFile.Margin = new Padding(2);
+            btnLoadFile.Name = "btnLoadFile";
+            btnLoadFile.Size = new Size(133, 32);
+            btnLoadFile.TabIndex = 3;
+            btnLoadFile.Text = "Load File";
+            btnLoadFile.UseVisualStyleBackColor = false;
+            btnLoadFile.Click += BtnLoadFile_Click;
             // 
             // btnSave
             // 
@@ -414,7 +446,7 @@
         private Label headerLabel;
         private Panel metricsPanel;
         private DataGridView itemGrid;
-        private Button btnRefresh;
+        private Button btnLoadFile;
         private Button btnSave;
 
         #endregion
@@ -432,5 +464,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private Button btnEditItem;
+        private Button btnSaveAs;
     }
 }

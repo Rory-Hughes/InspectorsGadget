@@ -75,7 +75,10 @@ namespace InspectorsGadget
             MessageBox.Show("Settings form not yet implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void BtnRefresh_Click(object sender, EventArgs e) => RefreshDashboard();
+        private void BtnLoadFile_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -118,6 +121,16 @@ namespace InspectorsGadget
                 InspectionManager.SaveToFile("inspections.csv");
                 RefreshDashboard();
             }
+        }
+
+        private void btnSaveAs_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
