@@ -12,7 +12,7 @@ using System.IO;
 
 namespace InspectorsGadget
 {
-    // Built entirely in code — no Designer.cs required.
+ 
     public class StartupForm2 : Form
     {
         // ── Public results read by Program.cs after OK ────────────────────────
