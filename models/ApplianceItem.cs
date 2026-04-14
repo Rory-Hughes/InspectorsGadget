@@ -28,7 +28,12 @@ namespace InspectorsGadget.models
         {
             int risk = IsOperational ? 1 : 5; // Base risk level 1 for operational, 5 for non-operational
             if (AgeInYears > 15) risk += 3; // Older appliances increase risk
-            if (risk >= 8) FlagCritical(base.InspectedBy); // Automatically flag as critical if risk is 8 or higher
+            // Automatically flag as critical if risk is 8 or higher
+            if (risk >= 8 && !string.IsNullOrWhiteSpace(InspectedBy))
+            {
+                var critical = FlagCritical(InspectedBy);
+                InspectionManager.AddItem(critical);
+            }
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
         // Override the GenerateSummary method to include specific details about the appliance item

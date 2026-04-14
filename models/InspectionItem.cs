@@ -98,7 +98,7 @@ namespace InspectorsGadget.models
                 note = note.Replace(",", " | "); // Replace commas with a separator for better readability in the notes so loading doesnt get messed up with .csv files that use commas to separate fields
             }
             // If overwrite is true, replace existing notes; otherwise, append with a separator
-            if (overWrite)
+            if (overWrite || Notes == string.Empty)
             {
                 Notes = note;
             } else

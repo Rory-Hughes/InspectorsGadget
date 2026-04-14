@@ -1,9 +1,10 @@
-﻿using System;
+﻿using InspectorsGadget.helpers;
+using InspectorsGadget.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InspectorsGadget.interfaces;
 
 namespace InspectorsGadget.models
 {
@@ -31,7 +32,12 @@ namespace InspectorsGadget.models
             int risk = 1; // Base risk level
             if (HasVisibleCracks) risk += 4; // Visible cracks significantly increase risk
             if (HasWaterDamage) risk += 3; // Water damage also significantly increases risk
-            if (risk >= 8) FlagCritical(base.InspectedBy); // Automatically flag as critical if risk is 8 or higher
+            // Automatically flag as critical if risk is 8 or higher
+            if (risk >= 8 && !string.IsNullOrWhiteSpace(InspectedBy))
+            {
+                var critical = FlagCritical(InspectedBy);
+                InspectionManager.AddItem(critical);
+            }
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 
