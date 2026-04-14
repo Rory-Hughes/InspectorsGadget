@@ -14,7 +14,7 @@ namespace InspectorsGadget.models
         public bool HasVisibleCracks { get; set; }
         public bool HasWaterDamage { get; set; }
 
-        private string CriticalMsg { get; } = "CRITICAL: Structural integrity at risk, immediate attention required!";
+        private string CriticalMsg { get; } = "CRITICAL: Structural integrity at risk! immediate attention required!";
 
         // Constructor that initializes base properties and specific properties for StructuralItem
         public StructuralItem(string itemName, decimal repairCost, bool hasVisibleCracks, bool hasWaterDamage)
@@ -50,7 +50,7 @@ namespace InspectorsGadget.models
         // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
         public CriticalItem FlagCritical(string flaggedBy)
         {
-            AddNote(CriticalMsg, true);
+            AddNote(CriticalMsg);
             return new CriticalItem(this, flaggedBy);
         }
     }

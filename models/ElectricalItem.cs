@@ -51,7 +51,7 @@ namespace InspectorsGadget.models
         // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
         public CriticalItem FlagCritical(string flaggedBy)
         {
-            AddNote(CriticalMsg, true);
+            AddNote(CriticalMsg);
             return new CriticalItem(this, flaggedBy);
         }
     }

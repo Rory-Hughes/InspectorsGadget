@@ -73,6 +73,11 @@ namespace InspectorsGadget.models
         // Requirement: Method Overloading - same method name, different signatures
         public void AddNote(string note)
         {
+            if (note.Contains(","))
+            {    
+                note = note.Replace(",", " | "); // Replace commas with a separator for better readability in the notes so loading doesnt get messed up with .csv files that use commas to separate fields
+            }
+
             // if this is the first note, just assign it; otherwise, append with a separator
             // default behavior is to append notes, but if the user wants to overwrite existing notes they can use the overloaded method with the overwrite parameter set to true
             if (Notes == string.Empty)
@@ -87,6 +92,11 @@ namespace InspectorsGadget.models
 
         public void AddNote(string note, bool overWrite)
         {
+
+            if (note.Contains(","))
+            {
+                note = note.Replace(",", " | "); // Replace commas with a separator for better readability in the notes so loading doesnt get messed up with .csv files that use commas to separate fields
+            }
             // If overwrite is true, replace existing notes; otherwise, append with a separator
             if (overWrite)
             {
