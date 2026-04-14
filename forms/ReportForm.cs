@@ -70,11 +70,11 @@ namespace InspectorsGadget
                 report.AppendLine("Report prepared by Inspector's Gadget");
                 report.AppendLine("═══════════════════════════════════════════════════════");
 
-                reportTextBox.Text = report.ToString();
+                txtReport.Text = report.ToString();
             }
             catch (Exception ex)
             {
-                reportTextBox.Text = $"Error generating report: {ex.Message}";
+                txtReport.Text = $"Error generating report: {ex.Message}";
             }
         }
 

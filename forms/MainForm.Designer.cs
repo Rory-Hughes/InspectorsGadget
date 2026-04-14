@@ -15,9 +15,9 @@
 
         private void InitializeComponent()
         {
-            sidebarPanel = new Panel();
-            sidebarTitle = new Label();
-            dashboardBtn = new Button();
+            panSidebar = new Panel();
+            lblSidebarTitle = new Label();
+            btnDashboard = new Button();
             btnAddInspection = new Button();
             btnViewReport = new Button();
             btnSettings = new Button();
@@ -25,8 +25,8 @@
             btnSaveAs = new Button();
             btnEditItem = new Button();
             btnDeleteItem = new Button();
-            headerLabel = new Label();
-            metricsPanel = new Panel();
+            lblHeader = new Label();
+            panMetrics = new Panel();
             lblCriticalIssues = new Label();
             lblItemsInspected = new Label();
             lblAvgRiskScore = new Label();
@@ -35,62 +35,62 @@
             lblAvgTitle = new Label();
             lblTotalRepairCost = new Label();
             lblTotalTitle = new Label();
-            itemGrid = new DataGridView();
+            dgvInspectionItems = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             btnLoadFile = new Button();
             btnSave = new Button();
-            sidebarPanel.SuspendLayout();
+            panSidebar.SuspendLayout();
             contentPanel.SuspendLayout();
-            metricsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)itemGrid).BeginInit();
+            panMetrics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvInspectionItems).BeginInit();
             SuspendLayout();
             // 
-            // sidebarPanel
+            // panSidebar
             // 
-            sidebarPanel.BackColor = Color.FromArgb(33, 37, 41);
-            sidebarPanel.Controls.Add(sidebarTitle);
-            sidebarPanel.Controls.Add(dashboardBtn);
-            sidebarPanel.Controls.Add(btnAddInspection);
-            sidebarPanel.Controls.Add(btnViewReport);
-            sidebarPanel.Controls.Add(btnSettings);
-            sidebarPanel.Dock = DockStyle.Left;
-            sidebarPanel.Location = new Point(0, 0);
-            sidebarPanel.Margin = new Padding(2);
-            sidebarPanel.Name = "sidebarPanel";
-            sidebarPanel.Padding = new Padding(8);
-            sidebarPanel.Size = new Size(160, 642);
-            sidebarPanel.TabIndex = 1;
+            panSidebar.BackColor = Color.FromArgb(33, 37, 41);
+            panSidebar.Controls.Add(lblSidebarTitle);
+            panSidebar.Controls.Add(btnDashboard);
+            panSidebar.Controls.Add(btnAddInspection);
+            panSidebar.Controls.Add(btnViewReport);
+            panSidebar.Controls.Add(btnSettings);
+            panSidebar.Dock = DockStyle.Left;
+            panSidebar.Location = new Point(0, 0);
+            panSidebar.Margin = new Padding(2);
+            panSidebar.Name = "panSidebar";
+            panSidebar.Padding = new Padding(8);
+            panSidebar.Size = new Size(160, 642);
+            panSidebar.TabIndex = 1;
             // 
-            // sidebarTitle
+            // lblSidebarTitle
             // 
-            sidebarTitle.AutoSize = true;
-            sidebarTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            sidebarTitle.ForeColor = Color.White;
-            sidebarTitle.Location = new Point(0, 0);
-            sidebarTitle.Margin = new Padding(0, 8, 0, 16);
-            sidebarTitle.Name = "sidebarTitle";
-            sidebarTitle.Size = new Size(107, 28);
-            sidebarTitle.TabIndex = 0;
-            sidebarTitle.Text = "Navigator";
+            lblSidebarTitle.AutoSize = true;
+            lblSidebarTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblSidebarTitle.ForeColor = Color.White;
+            lblSidebarTitle.Location = new Point(0, 0);
+            lblSidebarTitle.Margin = new Padding(0, 8, 0, 16);
+            lblSidebarTitle.Name = "lblSidebarTitle";
+            lblSidebarTitle.Size = new Size(107, 28);
+            lblSidebarTitle.TabIndex = 0;
+            lblSidebarTitle.Text = "Navigator";
             // 
-            // dashboardBtn
+            // btnDashboard
             // 
-            dashboardBtn.BackColor = Color.FromArgb(0, 105, 111);
-            dashboardBtn.Cursor = Cursors.Hand;
-            dashboardBtn.FlatStyle = FlatStyle.Flat;
-            dashboardBtn.Font = new Font("Segoe UI", 10F);
-            dashboardBtn.ForeColor = Color.White;
-            dashboardBtn.Location = new Point(8, 48);
-            dashboardBtn.Margin = new Padding(2);
-            dashboardBtn.Name = "dashboardBtn";
-            dashboardBtn.Size = new Size(144, 32);
-            dashboardBtn.TabIndex = 1;
-            dashboardBtn.Text = "Dashboard";
-            dashboardBtn.UseVisualStyleBackColor = false;
-            dashboardBtn.Click += BtnDashboard_Click;
+            btnDashboard.BackColor = Color.FromArgb(0, 105, 111);
+            btnDashboard.Cursor = Cursors.Hand;
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI", 10F);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(8, 48);
+            btnDashboard.Margin = new Padding(2);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(144, 32);
+            btnDashboard.TabIndex = 1;
+            btnDashboard.Text = "Dashboard";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += BtnDashboard_Click;
             // 
             // btnAddInspection
             // 
@@ -146,9 +146,9 @@
             contentPanel.Controls.Add(btnSaveAs);
             contentPanel.Controls.Add(btnEditItem);
             contentPanel.Controls.Add(btnDeleteItem);
-            contentPanel.Controls.Add(headerLabel);
-            contentPanel.Controls.Add(metricsPanel);
-            contentPanel.Controls.Add(itemGrid);
+            contentPanel.Controls.Add(lblHeader);
+            contentPanel.Controls.Add(panMetrics);
+            contentPanel.Controls.Add(dgvInspectionItems);
             contentPanel.Controls.Add(btnLoadFile);
             contentPanel.Controls.Add(btnSave);
             contentPanel.Dock = DockStyle.Fill;
@@ -203,35 +203,35 @@
             btnDeleteItem.UseVisualStyleBackColor = false;
             btnDeleteItem.Click += BtnDeleteItem_Click;
             // 
-            // headerLabel
+            // lblHeader
             // 
-            headerLabel.AutoSize = true;
-            headerLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            headerLabel.ForeColor = Color.FromArgb(33, 37, 41);
-            headerLabel.Location = new Point(200, 9);
-            headerLabel.Margin = new Padding(2, 0, 2, 0);
-            headerLabel.Name = "headerLabel";
-            headerLabel.Size = new Size(545, 37);
-            headerLabel.TabIndex = 0;
-            headerLabel.Text = "Inspector's Gadget - Property Dashboard";
+            lblHeader.AutoSize = true;
+            lblHeader.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblHeader.ForeColor = Color.FromArgb(33, 37, 41);
+            lblHeader.Location = new Point(200, 9);
+            lblHeader.Margin = new Padding(2, 0, 2, 0);
+            lblHeader.Name = "lblHeader";
+            lblHeader.Size = new Size(545, 37);
+            lblHeader.TabIndex = 0;
+            lblHeader.Text = "Inspector's Gadget - Property Dashboard";
             // 
-            // metricsPanel
+            // panMetrics
             // 
-            metricsPanel.AutoScroll = true;
-            metricsPanel.BackColor = Color.White;
-            metricsPanel.Controls.Add(lblCriticalIssues);
-            metricsPanel.Controls.Add(lblItemsInspected);
-            metricsPanel.Controls.Add(lblAvgRiskScore);
-            metricsPanel.Controls.Add(lblCriticalTitle);
-            metricsPanel.Controls.Add(lblItemsTitle);
-            metricsPanel.Controls.Add(lblAvgTitle);
-            metricsPanel.Controls.Add(lblTotalRepairCost);
-            metricsPanel.Controls.Add(lblTotalTitle);
-            metricsPanel.Location = new Point(16, 56);
-            metricsPanel.Margin = new Padding(2);
-            metricsPanel.Name = "metricsPanel";
-            metricsPanel.Size = new Size(953, 88);
-            metricsPanel.TabIndex = 1;
+            panMetrics.AutoScroll = true;
+            panMetrics.BackColor = Color.White;
+            panMetrics.Controls.Add(lblCriticalIssues);
+            panMetrics.Controls.Add(lblItemsInspected);
+            panMetrics.Controls.Add(lblAvgRiskScore);
+            panMetrics.Controls.Add(lblCriticalTitle);
+            panMetrics.Controls.Add(lblItemsTitle);
+            panMetrics.Controls.Add(lblAvgTitle);
+            panMetrics.Controls.Add(lblTotalRepairCost);
+            panMetrics.Controls.Add(lblTotalTitle);
+            panMetrics.Location = new Point(16, 56);
+            panMetrics.Margin = new Padding(2);
+            panMetrics.Name = "panMetrics";
+            panMetrics.Size = new Size(953, 88);
+            panMetrics.TabIndex = 1;
             // 
             // lblCriticalIssues
             // 
@@ -337,21 +337,21 @@
             lblTotalTitle.Text = "Total Repair Cost:";
             lblTotalTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // itemGrid
+            // dgvInspectionItems
             // 
-            itemGrid.AllowUserToAddRows = false;
-            itemGrid.AllowUserToDeleteRows = false;
-            itemGrid.BackgroundColor = Color.White;
-            itemGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            itemGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
-            itemGrid.Location = new Point(16, 160);
-            itemGrid.Margin = new Padding(2);
-            itemGrid.MultiSelect = false;
-            itemGrid.Name = "itemGrid";
-            itemGrid.RowHeadersWidth = 51;
-            itemGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            itemGrid.Size = new Size(953, 414);
-            itemGrid.TabIndex = 2;
+            dgvInspectionItems.AllowUserToAddRows = false;
+            dgvInspectionItems.AllowUserToDeleteRows = false;
+            dgvInspectionItems.BackgroundColor = Color.White;
+            dgvInspectionItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvInspectionItems.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
+            dgvInspectionItems.Location = new Point(16, 160);
+            dgvInspectionItems.Margin = new Padding(2);
+            dgvInspectionItems.MultiSelect = false;
+            dgvInspectionItems.Name = "dgvInspectionItems";
+            dgvInspectionItems.RowHeadersWidth = 51;
+            dgvInspectionItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvInspectionItems.Size = new Size(953, 414);
+            dgvInspectionItems.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -420,32 +420,32 @@
             AutoSize = true;
             ClientSize = new Size(1148, 642);
             Controls.Add(contentPanel);
-            Controls.Add(sidebarPanel);
+            Controls.Add(panSidebar);
             Margin = new Padding(2);
             Name = "MainForm";
             Text = "Inspector's Gadget";
-            sidebarPanel.ResumeLayout(false);
-            sidebarPanel.PerformLayout();
+            panSidebar.ResumeLayout(false);
+            panSidebar.PerformLayout();
             contentPanel.ResumeLayout(false);
             contentPanel.PerformLayout();
-            metricsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)itemGrid).EndInit();
+            panMetrics.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvInspectionItems).EndInit();
             ResumeLayout(false);
         }
 
 
         #region Designer Fields
 
-        private Panel sidebarPanel;
-        private Label sidebarTitle;
-        private Button dashboardBtn;
+        private Panel panSidebar;
+        private Label lblSidebarTitle;
+        private Button btnDashboard;
         private Button btnAddInspection;
         private Button btnViewReport;
         private Button btnSettings;
         private Panel contentPanel;
-        private Label headerLabel;
-        private Panel metricsPanel;
-        private DataGridView itemGrid;
+        private Label lblHeader;
+        private Panel panMetrics;
+        private DataGridView dgvInspectionItems;
         private Button btnLoadFile;
         private Button btnSave;
 

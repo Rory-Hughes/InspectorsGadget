@@ -26,16 +26,16 @@ namespace InspectorsGadget.forms
         // Populates all form fields from the item being edited.
         private void LoadItemData()
         {
-            itemNameTextBox.Text = _originalItem.ItemName;
-            repairCostTextBox.Text = _originalItem.RepairCost.ToString("F2");
-            notesTextBox.Text = _originalItem.Notes;
+            txtItemName.Text = _originalItem.ItemName;
+            txtRepairCost.Text = _originalItem.RepairCost.ToString("F2");
+            txtNotes.Text = _originalItem.Notes;
 
             // Select the matching type and lock it — we replace the object on
             // save anyway, but the UI shouldn't suggest the type is changeable.
             string typeName = _originalItem.GetType().Name.Replace("Item", "");
-            int idx = typeComboBox.Items.IndexOf(typeName);
-            typeComboBox.SelectedIndex = idx >= 0 ? idx : 0;
-            typeComboBox.Enabled = false;
+            int idx = cboItemType.Items.IndexOf(typeName);
+            cboItemType.SelectedIndex = idx >= 0 ? idx : 0;
+            cboItemType.Enabled = false;
 
             PopulateDynamicFields(_originalItem);
         }
@@ -43,8 +43,8 @@ namespace InspectorsGadget.forms
         // Rebuilds the type-specific controls, pre-filling values when an item is supplied.
         private void PopulateDynamicFields(InspectionItem item = null)
         {
-            dynamicFieldsPanel.Controls.Clear();
-            string type = typeComboBox.SelectedItem?.ToString() ?? "Electrical";
+            panDynamicFields.Controls.Clear();
+            string type = cboItemType.SelectedItem?.ToString() ?? "Electrical";
             int yPos = 10;
 
             switch (type)
@@ -52,7 +52,7 @@ namespace InspectorsGadget.forms
                 case "Electrical":
                     var elec = item as ElectricalItem;
 
-                    dynamicFieldsPanel.Controls.Add(new Label
+                    panDynamicFields.Controls.Add(new Label
                     {
                         Text = "Amp Rating:",
                         Font = new Font("Segoe UI", 9F, FontStyle.Bold),
@@ -60,7 +60,7 @@ namespace InspectorsGadget.forms
                         AutoSize = true
                     });
 
-                    dynamicFieldsPanel.Controls.Add(new TextBox
+                    panDynamicFields.Controls.Add(new TextBox
                     {
                         Location = new Point(10, yPos + 25),
                         Width = 400,
@@ -69,7 +69,7 @@ namespace InspectorsGadget.forms
                     });
 
                     yPos += 70;
-                    dynamicFieldsPanel.Controls.Add(new CheckBox
+                    panDynamicFields.Controls.Add(new CheckBox
                     {
                         Text = "Has Grounding?",
                         Location = new Point(10, yPos),
@@ -82,7 +82,7 @@ namespace InspectorsGadget.forms
                 case "Structural":
                     var struc = item as StructuralItem;
 
-                    dynamicFieldsPanel.Controls.Add(new CheckBox
+                    panDynamicFields.Controls.Add(new CheckBox
                     {
                         Text = "Has Visible Cracks?",
                         Location = new Point(10, yPos),
@@ -92,7 +92,7 @@ namespace InspectorsGadget.forms
                     });
 
                     yPos += 50;
-                    dynamicFieldsPanel.Controls.Add(new CheckBox
+                    panDynamicFields.Controls.Add(new CheckBox
                     {
                         Text = "Has Water Damage?",
                         Location = new Point(10, yPos),
@@ -105,7 +105,7 @@ namespace InspectorsGadget.forms
                 case "Appliance":
                     var appl = item as ApplianceItem;
 
-                    dynamicFieldsPanel.Controls.Add(new Label
+                    panDynamicFields.Controls.Add(new Label
                     {
                         Text = "Age (Years):",
                         Font = new Font("Segoe UI", 9F, FontStyle.Bold),
@@ -113,7 +113,7 @@ namespace InspectorsGadget.forms
                         AutoSize = true
                     });
 
-                    dynamicFieldsPanel.Controls.Add(new TextBox
+                    panDynamicFields.Controls.Add(new TextBox
                     {
                         Location = new Point(10, yPos + 25),
                         Width = 400,
@@ -122,7 +122,7 @@ namespace InspectorsGadget.forms
                     });
 
                     yPos += 70;
-                    dynamicFieldsPanel.Controls.Add(new CheckBox
+                    panDynamicFields.Controls.Add(new CheckBox
                     {
                         Text = "Is Operational?",
                         Location = new Point(10, yPos),
@@ -138,7 +138,7 @@ namespace InspectorsGadget.forms
         {
             try
             {
-                string itemName = itemNameTextBox.Text.Trim();
+                string itemName = txtItemName.Text.Trim();
                 if (string.IsNullOrWhiteSpace(itemName))
                 {
                     MessageBox.Show("Please enter an item name.", "Validation Error",
@@ -146,14 +146,14 @@ namespace InspectorsGadget.forms
                     return;
                 }
 
-                if (!decimal.TryParse(repairCostTextBox.Text, out decimal cost) || cost <= 0)
+                if (!decimal.TryParse(txtRepairCost.Text, out decimal cost) || cost <= 0)
                 {
                     MessageBox.Show("Please enter a valid repair cost (must be greater than 0).",
                         "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                string type = typeComboBox.SelectedItem?.ToString() ?? "Electrical";
+                string type = cboItemType.SelectedItem?.ToString() ?? "Electrical";
                 InspectionItem updatedItem = null;
 
                 switch (type)
@@ -190,8 +190,8 @@ namespace InspectorsGadget.forms
                 if (updatedItem != null)
                 {
                     // Overwrite notes (avoid duplicating if the user didn't change them).
-                    if (!string.IsNullOrWhiteSpace(notesTextBox.Text))
-                        updatedItem.AddNote(notesTextBox.Text, true);
+                    if (!string.IsNullOrWhiteSpace(txtNotes.Text))
+                        updatedItem.AddNote(txtNotes.Text, true);
 
                     // Swap old object for updated one, then persist.
                     InspectionManager.RemoveItem(_originalItem);
@@ -211,13 +211,13 @@ namespace InspectorsGadget.forms
 
         private string GetDynamicFieldValue(string fieldName)
         {
-            var control = dynamicFieldsPanel.Controls[fieldName];
+            var control = panDynamicFields.Controls[fieldName];
             return control is TextBox tb ? tb.Text : string.Empty;
         }
 
         private bool GetDynamicCheckBoxValue(string fieldName)
         {
-            var control = dynamicFieldsPanel.Controls[fieldName];
+            var control = panDynamicFields.Controls[fieldName];
             return control is CheckBox cb && cb.Checked;
         }
     }

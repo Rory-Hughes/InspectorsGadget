@@ -43,10 +43,10 @@ namespace InspectorsGadget
                 lblCriticalIssues.Text = criticalCount.ToString();
 
                 // Populate grid
-                itemGrid.Rows.Clear();
+                dgvInspectionItems.Rows.Clear();
                 foreach (var item in InspectionManager.GetSortedByRisk())
                 {
-                    itemGrid.Rows.Add(
+                    dgvInspectionItems.Rows.Add(
                         item.ItemName,
                         item.GetType().Name.Replace("Item", ""),
                         $"{item.RiskLevel}/10",
@@ -88,7 +88,7 @@ namespace InspectorsGadget
         private void btnEditItem_Click(object sender, EventArgs e)
         {
             // Guard: require a selected row.
-            if (itemGrid.SelectedRows.Count == 0)
+            if (dgvInspectionItems.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select an item to edit.", "No Selection",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -96,7 +96,7 @@ namespace InspectorsGadget
             }
 
             // Column 0 holds ItemName — matches how rows are built in RefreshDashboard.
-            string selectedName = itemGrid.SelectedRows[0].Cells[0].Value?.ToString();
+            string selectedName = dgvInspectionItems.SelectedRows[0].Cells[0].Value?.ToString();
             var itemToEdit = InspectionManager.Items.FirstOrDefault(i => i.ItemName == selectedName);
 
             if (itemToEdit == null)
@@ -124,13 +124,13 @@ namespace InspectorsGadget
         private void BtnDeleteItem_Click(object sender, EventArgs e)
         {
             // Check if an item is selected in the grid
-            if (itemGrid.SelectedRows.Count == 0)
+            if (dgvInspectionItems.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select an item to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             // Column 0 holds ItemName - matches how rows are added in RefreshDashboard
-            string selectedName = itemGrid.SelectedRows[0].Cells[0].Value?.ToString();
+            string selectedName = dgvInspectionItems.SelectedRows[0].Cells[0].Value?.ToString();
 
             // Find the actual object in the InspectionManager.Items list that matches the selected name
             var itemToRemove = InspectionManager.Items.FirstOrDefault(i => i.ItemName == selectedName);

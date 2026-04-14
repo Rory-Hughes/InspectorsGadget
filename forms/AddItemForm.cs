@@ -27,8 +27,8 @@ namespace InspectorsGadget
 
         private void PopulateDynamicFields()
         {
-            dynamicFieldsPanel.Controls.Clear();
-            string type = typeComboBox.SelectedItem?.ToString() ?? "Electrical";
+            panDynamicFields.Controls.Clear();
+            string type = cboItemType.SelectedItem?.ToString() ?? "Electrical";
 
             int yPos = 10;
 
@@ -41,13 +41,13 @@ namespace InspectorsGadget
                     ampLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                     ampLabel.Location = new Point(10, yPos);
                     ampLabel.AutoSize = true;
-                    dynamicFieldsPanel.Controls.Add(ampLabel);
+                    panDynamicFields.Controls.Add(ampLabel);
 
                     TextBox ampTextBox = new TextBox();
                     ampTextBox.Location = new Point(10, yPos + 25);
                     ampTextBox.Width = 400;
                     ampTextBox.Name = "AmpRating";
-                    dynamicFieldsPanel.Controls.Add(ampTextBox);
+                    panDynamicFields.Controls.Add(ampTextBox);
 
                     yPos += 70;
 
@@ -57,7 +57,7 @@ namespace InspectorsGadget
                     groundingCheckBox.Location = new Point(10, yPos);
                     groundingCheckBox.AutoSize = true;
                     groundingCheckBox.Name = "HasGrounding";
-                    dynamicFieldsPanel.Controls.Add(groundingCheckBox);
+                    panDynamicFields.Controls.Add(groundingCheckBox);
                     break;
 
                 case "Structural":
@@ -67,7 +67,7 @@ namespace InspectorsGadget
                     cracksCheckBox.Location = new Point(10, yPos);
                     cracksCheckBox.AutoSize = true;
                     cracksCheckBox.Name = "HasVisibleCracks";
-                    dynamicFieldsPanel.Controls.Add(cracksCheckBox);
+                    panDynamicFields.Controls.Add(cracksCheckBox);
 
                     yPos += 50;
 
@@ -77,7 +77,7 @@ namespace InspectorsGadget
                     waterCheckBox.Location = new Point(10, yPos);
                     waterCheckBox.AutoSize = true;
                     waterCheckBox.Name = "HasWaterDamage";
-                    dynamicFieldsPanel.Controls.Add(waterCheckBox);
+                    panDynamicFields.Controls.Add(waterCheckBox);
                     break;
 
                 case "Appliance":
@@ -87,13 +87,13 @@ namespace InspectorsGadget
                     ageLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                     ageLabel.Location = new Point(10, yPos);
                     ageLabel.AutoSize = true;
-                    dynamicFieldsPanel.Controls.Add(ageLabel);
+                    panDynamicFields.Controls.Add(ageLabel);
 
                     TextBox ageTextBox = new TextBox();
                     ageTextBox.Location = new Point(10, yPos + 25);
                     ageTextBox.Width = 400;
                     ageTextBox.Name = "AgeInYears";
-                    dynamicFieldsPanel.Controls.Add(ageTextBox);
+                    panDynamicFields.Controls.Add(ageTextBox);
 
                     yPos += 70;
 
@@ -104,7 +104,7 @@ namespace InspectorsGadget
                     operationalCheckBox.AutoSize = true;
                     operationalCheckBox.Checked = true;
                     operationalCheckBox.Name = "IsOperational";
-                    dynamicFieldsPanel.Controls.Add(operationalCheckBox);
+                    panDynamicFields.Controls.Add(operationalCheckBox);
                     break;
             }
         }
@@ -113,21 +113,21 @@ namespace InspectorsGadget
         {
             try
             {
-                string itemName = itemNameTextBox.Text.Trim();
+                string itemName = txtItemName.Text.Trim();
                 if (string.IsNullOrWhiteSpace(itemName))
                 {
                     MessageBox.Show("Please enter an item name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (!decimal.TryParse(repairCostTextBox.Text, out decimal cost) || cost <= 0)
+                if (!decimal.TryParse(txtRepairCost.Text, out decimal cost) || cost <= 0)
                 {
                     MessageBox.Show("Please enter a valid repair cost (must be greater than 0).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 InspectionItem item = null;
-                string type = typeComboBox.SelectedItem?.ToString() ?? "Electrical";
+                string type = cboItemType.SelectedItem?.ToString() ?? "Electrical";
 
                 switch (type)
                 {
@@ -160,9 +160,9 @@ namespace InspectorsGadget
 
                 if (item != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(notesTextBox.Text))
+                    if (!string.IsNullOrWhiteSpace(txtNotes.Text))
                     {
-                        item.AddNote(notesTextBox.Text);
+                        item.AddNote(txtNotes.Text);
                     }
 
                     InspectionManager.AddItem(item);
@@ -179,13 +179,13 @@ namespace InspectorsGadget
 
         private string GetDynamicFieldValue(string fieldName)
         {
-            var control = dynamicFieldsPanel.Controls[fieldName];
+            var control = panDynamicFields.Controls[fieldName];
             return control is TextBox tb ? tb.Text : string.Empty;
         }
 
         private bool GetDynamicCheckBoxValue(string fieldName)
         {
-            var control = dynamicFieldsPanel.Controls[fieldName];
+            var control = panDynamicFields.Controls[fieldName];
             return control is CheckBox cb && cb.Checked;
         }
     }
