@@ -23,12 +23,25 @@ namespace InspectorsGadget.forms
             txtItemName = new TextBox();
             lblRepairCost = new Label();
             txtRepairCost = new TextBox();
-            panDynamicFields = new Panel();
             lblNotes = new Label();
             txtNotes = new TextBox();
             btnSaveItem = new Button();
             btnCancel = new Button();
+            panElectrical = new Panel();
+            chkHasGrounding = new CheckBox();
+            txtAmp = new TextBox();
+            lblAmp = new Label();
+            panStructural = new Panel();
+            chkHasWaterDamage = new CheckBox();
+            chkHasVisibleCracks = new CheckBox();
+            panAppliance = new Panel();
+            chkIsOperational = new CheckBox();
+            txtAge = new TextBox();
+            lblAge = new Label();
             panMain.SuspendLayout();
+            panElectrical.SuspendLayout();
+            panStructural.SuspendLayout();
+            panAppliance.SuspendLayout();
             SuspendLayout();
             // 
             // panMain
@@ -40,11 +53,13 @@ namespace InspectorsGadget.forms
             panMain.Controls.Add(txtItemName);
             panMain.Controls.Add(lblRepairCost);
             panMain.Controls.Add(txtRepairCost);
-            panMain.Controls.Add(panDynamicFields);
             panMain.Controls.Add(lblNotes);
             panMain.Controls.Add(txtNotes);
             panMain.Controls.Add(btnSaveItem);
             panMain.Controls.Add(btnCancel);
+            panMain.Controls.Add(panAppliance);
+            panMain.Controls.Add(panElectrical);
+            panMain.Controls.Add(panStructural);
             panMain.Dock = DockStyle.Fill;
             panMain.Location = new Point(16, 16);
             panMain.Name = "panMain";
@@ -104,14 +119,6 @@ namespace InspectorsGadget.forms
             txtRepairCost.Size = new Size(509, 27);
             txtRepairCost.TabIndex = 5;
             // 
-            // panDynamicFields
-            // 
-            panDynamicFields.AutoScroll = true;
-            panDynamicFields.Location = new Point(16, 208);
-            panDynamicFields.Name = "panDynamicFields";
-            panDynamicFields.Size = new Size(509, 216);
-            panDynamicFields.TabIndex = 6;
-            // 
             // lblNotes
             // 
             lblNotes.AutoSize = true;
@@ -158,6 +165,120 @@ namespace InspectorsGadget.forms
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
             // 
+            // panElectrical
+            // 
+            panElectrical.AutoScroll = true;
+            panElectrical.Controls.Add(chkHasGrounding);
+            panElectrical.Controls.Add(txtAmp);
+            panElectrical.Controls.Add(lblAmp);
+            panElectrical.Location = new Point(16, 208);
+            panElectrical.Margin = new Padding(2);
+            panElectrical.Name = "panElectrical";
+            panElectrical.Size = new Size(509, 216);
+            panElectrical.TabIndex = 13;
+            panElectrical.Visible = false;
+            // 
+            // chkHasGrounding
+            // 
+            chkHasGrounding.AutoSize = true;
+            chkHasGrounding.Location = new Point(10, 80);
+            chkHasGrounding.Name = "chkHasGrounding";
+            chkHasGrounding.Size = new Size(137, 24);
+            chkHasGrounding.TabIndex = 2;
+            chkHasGrounding.Text = "Has Grounding?";
+            chkHasGrounding.UseVisualStyleBackColor = true;
+            // 
+            // txtAmp
+            // 
+            txtAmp.Location = new Point(10, 35);
+            txtAmp.Name = "txtAmp";
+            txtAmp.Size = new Size(400, 27);
+            txtAmp.TabIndex = 1;
+            // 
+            // lblAmp
+            // 
+            lblAmp.AutoSize = true;
+            lblAmp.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAmp.Location = new Point(10, 10);
+            lblAmp.Name = "lblAmp";
+            lblAmp.Size = new Size(97, 20);
+            lblAmp.TabIndex = 0;
+            lblAmp.Text = "Amp Rating:";
+            // 
+            // panStructural
+            // 
+            panStructural.AutoScroll = true;
+            panStructural.Controls.Add(chkHasWaterDamage);
+            panStructural.Controls.Add(chkHasVisibleCracks);
+            panStructural.Location = new Point(16, 208);
+            panStructural.Margin = new Padding(2);
+            panStructural.Name = "panStructural";
+            panStructural.Size = new Size(509, 216);
+            panStructural.TabIndex = 12;
+            panStructural.Visible = false;
+            // 
+            // chkHasWaterDamage
+            // 
+            chkHasWaterDamage.AutoSize = true;
+            chkHasWaterDamage.Location = new Point(10, 60);
+            chkHasWaterDamage.Name = "chkHasWaterDamage";
+            chkHasWaterDamage.Size = new Size(167, 24);
+            chkHasWaterDamage.TabIndex = 1;
+            chkHasWaterDamage.Text = "Has Water Damage?";
+            chkHasWaterDamage.UseVisualStyleBackColor = true;
+            // 
+            // chkHasVisibleCracks
+            // 
+            chkHasVisibleCracks.AutoSize = true;
+            chkHasVisibleCracks.Location = new Point(10, 10);
+            chkHasVisibleCracks.Name = "chkHasVisibleCracks";
+            chkHasVisibleCracks.Size = new Size(157, 24);
+            chkHasVisibleCracks.TabIndex = 0;
+            chkHasVisibleCracks.Text = "Has Visible Cracks?";
+            chkHasVisibleCracks.UseVisualStyleBackColor = true;
+            // 
+            // panAppliance
+            // 
+            panAppliance.AutoScroll = true;
+            panAppliance.Controls.Add(chkIsOperational);
+            panAppliance.Controls.Add(txtAge);
+            panAppliance.Controls.Add(lblAge);
+            panAppliance.Location = new Point(16, 208);
+            panAppliance.Margin = new Padding(2);
+            panAppliance.Name = "panAppliance";
+            panAppliance.Size = new Size(509, 216);
+            panAppliance.TabIndex = 11;
+            // 
+            // chkIsOperational
+            // 
+            chkIsOperational.AutoSize = true;
+            chkIsOperational.Checked = true;
+            chkIsOperational.CheckState = CheckState.Checked;
+            chkIsOperational.Location = new Point(10, 80);
+            chkIsOperational.Name = "chkIsOperational";
+            chkIsOperational.Size = new Size(131, 24);
+            chkIsOperational.TabIndex = 2;
+            chkIsOperational.Text = "Is Operational?";
+            chkIsOperational.UseVisualStyleBackColor = true;
+            chkIsOperational.Visible = false;
+            // 
+            // txtAge
+            // 
+            txtAge.Location = new Point(10, 35);
+            txtAge.Name = "txtAge";
+            txtAge.Size = new Size(400, 27);
+            txtAge.TabIndex = 1;
+            // 
+            // lblAge
+            // 
+            lblAge.AutoSize = true;
+            lblAge.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAge.Location = new Point(10, 10);
+            lblAge.Name = "lblAge";
+            lblAge.Size = new Size(94, 20);
+            lblAge.TabIndex = 0;
+            lblAge.Text = "Age (Years):";
+            // 
             // EditItemForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -174,6 +295,12 @@ namespace InspectorsGadget.forms
             Text = "Edit Inspection Item";
             panMain.ResumeLayout(false);
             panMain.PerformLayout();
+            panElectrical.ResumeLayout(false);
+            panElectrical.PerformLayout();
+            panStructural.ResumeLayout(false);
+            panStructural.PerformLayout();
+            panAppliance.ResumeLayout(false);
+            panAppliance.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -182,7 +309,6 @@ namespace InspectorsGadget.forms
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.TextBox txtRepairCost;
         private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.Panel panDynamicFields;
         #endregion
 
         private System.Windows.Forms.Panel panMain;
@@ -192,5 +318,16 @@ namespace InspectorsGadget.forms
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.Button btnSaveItem;
         private System.Windows.Forms.Button btnCancel;
+        private Panel panAppliance;
+        private CheckBox chkIsOperational;
+        private TextBox txtAge;
+        private Label lblAge;
+        private Panel panStructural;
+        private CheckBox chkHasWaterDamage;
+        private CheckBox chkHasVisibleCracks;
+        private Panel panElectrical;
+        private CheckBox chkHasGrounding;
+        private TextBox txtAmp;
+        private Label lblAmp;
     }
 }
