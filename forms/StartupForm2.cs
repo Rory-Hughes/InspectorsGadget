@@ -138,7 +138,6 @@ namespace InspectorsGadget
             _choicePanel.Controls.AddRange(new Control[]
                 { _choiceLabel, _btnNew, _btnLoad, _errorLabel });
         }
-
         private void BuildNewPanel()
         {
             _newPanel.Location = new Point(0, 88);

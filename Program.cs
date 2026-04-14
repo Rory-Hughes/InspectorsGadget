@@ -1,3 +1,7 @@
+using System;
+using System.Windows.Forms;
+using InspectorsGadget.forms;
+
 namespace InspectorsGadget
 {
     internal static class Program
@@ -9,7 +13,7 @@ namespace InspectorsGadget
 
             // Show the startup/welcome screen before opening MainForm.
             // If the user closes it without confirming, the application exits cleanly.
-            using var startup = new StartupForm2();
+            using var startup = new StartupForm();
             if (startup.ShowDialog() != DialogResult.OK)
                 return;
 
