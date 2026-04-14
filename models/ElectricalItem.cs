@@ -13,6 +13,8 @@ namespace InspectorsGadget.models
         public int AmpRating { get; set; }
         public bool HasGrounding { get; set; }
 
+        private string CriticalMsg { get; } = "CRITICAL: Immediate electrical attention required!";
+
         // Constructor that initializes base properties and specific properties for ElectricalItem
         public ElectricalItem(string itemName, decimal repairCost, int ampRating, bool hasGrounding)
             : base(itemName, repairCost)
@@ -49,7 +51,7 @@ namespace InspectorsGadget.models
         // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
         public CriticalItem FlagCritical(string flaggedBy)
         {
-            AddNote("CRITICAL: Immediate electrical attention required!", true);
+            AddNote(CriticalMsg, true);
             return new CriticalItem(this, flaggedBy);
         }
     }

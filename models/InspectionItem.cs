@@ -75,13 +75,26 @@ namespace InspectorsGadget.models
         {
             // if this is the first note, just assign it; otherwise, append with a separator
             // default behavior is to append notes, but if the user wants to overwrite existing notes they can use the overloaded method with the overwrite parameter set to true
-            Notes = string.IsNullOrWhiteSpace(Notes) ? note : Notes + " | " + note;
+            if (Notes == string.Empty)
+            {
+                Notes = note;
+            }
+            else
+            {
+                Notes += " | " + note;
+            }
         }
 
-        public void AddNote(string note, bool overwrite)
+        public void AddNote(string note, bool overWrite)
         {
             // If overwrite is true, replace existing notes; otherwise, append with a separator
-            Notes = overwrite ? note : Notes + " | " + note;
+            if (overWrite)
+            {
+                Notes = note;
+            } else
+            {
+                Notes += " | " + note;
+            }
         }
 
         // Requirement: Operator Overloading - sum of repair costs for two inspection items

@@ -13,6 +13,8 @@ namespace InspectorsGadget.models
         public int AgeInYears { get; set; }
         public bool IsOperational { get; set; }
 
+        private string CriticalMsg { get; } = "CRITICAL: Repair or replace appliance as soon as possible!";
+
         public ApplianceItem(string itemName, decimal repairCost, int ageInYears, bool isOperational)
             : base(itemName, repairCost)
         {
@@ -44,7 +46,7 @@ namespace InspectorsGadget.models
         // Method to flag the item as critical, which adds a note and returns a new CriticalItem instance based on this item
         public CriticalItem FlagCritical(string flaggedBy)
         {
-            AddNote("CRITICAL: Repair or replace appliance as soon as possible!", true);
+            AddNote(CriticalMsg, true);
             return new CriticalItem(this, flaggedBy);
         }
     }

@@ -58,9 +58,9 @@ namespace InspectorsGadget.helpers
             {
                 var lines = Items.Select(i => i switch
                 {
-                    ElectricalItem e => $"Electrical,{e.ItemName},{e.RepairCost},{e.RiskLevel},{e.Notes},{e.AmpRating},{e.HasGrounding}",
-                    StructuralItem s => $"Structural,{s.ItemName},{s.RepairCost},{s.RiskLevel},{s.Notes},{s.HasVisibleCracks},{s.HasWaterDamage}",
-                    ApplianceItem a => $"Appliance,{a.ItemName},{a.RepairCost},{a.RiskLevel},{a.Notes},{a.AgeInYears},{a.IsOperational}",
+                    ElectricalItem e => $"Electrical,{e.ItemName},{e.RepairCost},{e.RiskLevel},{e.Notes},{e.AmpRating},{e.HasGrounding},{e.InspectedBy}",
+                    StructuralItem s => $"Structural,{s.ItemName},{s.RepairCost},{s.RiskLevel},{s.Notes},{s.HasVisibleCracks},{s.HasWaterDamage},{s.InspectedBy}",
+                    ApplianceItem a => $"Appliance,{a.ItemName},{a.RepairCost},{a.RiskLevel},{a.Notes},{a.AgeInYears},{a.IsOperational},{a.InspectedBy}",
                     CriticalItem c => $"Critical,{c.Source.ItemName},{c.RepairCost},{c.RiskLevel},{c.Notes},{c.FlaggedBy},{c.FlaggedDate:yyyy-MM-dd}",
                     _ => throw new InvalidOperationException($"Unknown type: {i.GetType().Name}")
                 });
@@ -74,6 +74,9 @@ namespace InspectorsGadget.helpers
             try
             {
                 Items.Clear();
+                var firstLine = File.ReadLines(filePath).FirstOrDefault();
+                var lineSplit = firstLine.Split(',');
+                InspectorName = lineSplit[7];
                 foreach (var line in File.ReadAllLines(filePath))
                 {
                     var p = line.Split(',');
