@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InspectorsGadget.helpers;
 using InspectorsGadget.interfaces;
 
 namespace InspectorsGadget.models
@@ -25,6 +26,7 @@ namespace InspectorsGadget.models
         {
             int risk = IsOperational ? 1 : 5; // Base risk level 1 for operational, 5 for non-operational
             if (AgeInYears > 15) risk += 3; // Older appliances increase risk
+            if (risk >= 8) FlagCritical(base.InspectedBy); // Automatically flag as critical if risk is 8 or higher
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
         // Override the GenerateSummary method to include specific details about the appliance item

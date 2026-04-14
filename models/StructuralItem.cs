@@ -29,6 +29,7 @@ namespace InspectorsGadget.models
             int risk = 1; // Base risk level
             if (HasVisibleCracks) risk += 4; // Visible cracks significantly increase risk
             if (HasWaterDamage) risk += 3; // Water damage also significantly increases risk
+            if (risk >= 8) FlagCritical(base.InspectedBy); // Automatically flag as critical if risk is 8 or higher
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 

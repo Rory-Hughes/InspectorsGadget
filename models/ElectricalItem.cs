@@ -29,6 +29,7 @@ namespace InspectorsGadget.models
             int risk = 1; // Base risk level
             if (AmpRating > 25) risk += 3; // Higher amp rating increases risk
             if (!HasGrounding) risk += 4; // Lack of grounding significantly increases risk
+            if (risk >= 8) FlagCritical(base.InspectedBy); // Automatically flag as critical if risk is 8 or higher
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 

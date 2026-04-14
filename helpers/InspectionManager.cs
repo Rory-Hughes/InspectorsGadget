@@ -15,9 +15,9 @@ namespace InspectorsGadget.helpers
 
         /// <summary>
         /// Name of the inspector signing this report.
-        /// Set by StartupForm on New Report, empty for loaded reports.
+        /// Set by StartupForm on New Report,
         /// </summary>
-        public static string InspectorName { get; set; } = string.Empty;
+        public static string InspectorName { get; set; }
 
         // public method to add items to the list
         public static void AddItem(InspectionItem item) => Items.Add(item);

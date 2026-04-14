@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InspectorsGadget.helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,13 @@ namespace InspectorsGadget.models
 {
     // Requirement: Abstract Base Class
     // Implements IComparable
-    public abstract class InspectionItem : IComparable<InspectionItem>  
+    public abstract class InspectionItem : IComparable<InspectionItem>
     {
         // Requirement : Encapsulation - private backing fields with Properties
         private string _itemName;
         private decimal _repairCost;
         private int _riskLevel;
+        private string _inspectedBy = InspectionManager.InspectorName;
         
         public string ItemName
         {
@@ -40,6 +42,11 @@ namespace InspectorsGadget.models
             protected set => _riskLevel = Math.Clamp(value, 1, 10); // Ensure risk level is between 1 and 10
         }
 
+        public string InspectedBy
+        {             
+            get => _inspectedBy;
+        }
+
         public bool IsCritical => RiskLevel >= 8; // Consider items with risk level 8 or higher as critical
         // Auto-Implemented Property for notes
         public string Notes { get; set; } = string.Empty;
@@ -55,11 +62,12 @@ namespace InspectorsGadget.models
         // Requirement: Polymorphism - Abstract method to be implemented by derived classes
         public abstract int CalculateRisk();
 
+
         // Requirement: Method Overriding (virtual base for derived classes to override)
         public virtual string GenerateSummary()
         {
-            // Format the summary to include type name, item name, risk level, and repair cost
-            return $"[{GetType().Name}] {ItemName} | Risk: {RiskLevel}/10 | Est. Cost: ${RepairCost:F2}";
+            // Format the summary to include type name, item name, risk level, repair cost
+            return ToString(); // Use the overridden ToString method for a consistent summary format across all derived classes
         }
 
         // Requirement: Method Overloading - same method name, different signatures
@@ -92,7 +100,7 @@ namespace InspectorsGadget.models
         // Override ToString to provide a meaningful string representation of the inspection item
         public override string ToString()
         {
-            return GenerateSummary();
+            return $"[{GetType().Name}] {ItemName} | Risk: {RiskLevel}/10 | Est. Cost: ${RepairCost:F2}";
         }
     }
 }
