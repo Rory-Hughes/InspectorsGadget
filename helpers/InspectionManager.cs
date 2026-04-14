@@ -49,9 +49,9 @@ namespace InspectorsGadget.helpers
         }
 
         // public method to get all critical items, using LINQ where to filter items based on their IsCritical property
-        public static List<InspectionItem> GetCriticalItems()
+        public static List<CriticalItem> GetCriticalItems()
         {
-            return Items.Where(i => i.IsCritical).ToList();
+            return Items.OfType<CriticalItem>().ToList();
         }
 
         // Requirement: IComparable usage - sort items by risk level

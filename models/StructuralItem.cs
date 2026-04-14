@@ -24,6 +24,7 @@ namespace InspectorsGadget.models
             HasVisibleCracks = hasVisibleCracks;
             HasWaterDamage = hasWaterDamage;
             RiskLevel = CalculateRisk(); // Set risk level based on specific criteria
+            addCritical(RiskLevel, InspectedBy); // Automatically flag as critical if risk is 8 or higher
         }
 
         // Override the CalculateRisk method to determine risk level based on structural issues
@@ -32,12 +33,6 @@ namespace InspectorsGadget.models
             int risk = 1; // Base risk level
             if (HasVisibleCracks) risk += 4; // Visible cracks significantly increase risk
             if (HasWaterDamage) risk += 3; // Water damage also significantly increases risk
-            // Automatically flag as critical if risk is 8 or higher
-            if (risk >= 8 && !string.IsNullOrWhiteSpace(InspectedBy))
-            {
-                var critical = FlagCritical(InspectedBy);
-                InspectionManager.AddItem(critical);
-            }
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 
@@ -58,6 +53,15 @@ namespace InspectorsGadget.models
         {
             AddNote(CriticalMsg);
             return new CriticalItem(this, flaggedBy);
+        }
+
+        public void addCritical(int riskLevel, string flaggedBy)
+        {
+            if (riskLevel >= 8)
+            {
+                var critical = FlagCritical(flaggedBy);
+                InspectionManager.AddItem(critical);
+            }
         }
     }
 }

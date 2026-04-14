@@ -67,7 +67,7 @@ namespace InspectorsGadget.forms
 
             if (string.IsNullOrWhiteSpace(txtFile.Text))
             {
-                txtFile.Text = $"inspection_{DateTime.Now:yyyy-MM-dd}";
+                txtFile.Text = $"inspection_{DateTime.Now:yyyyMMdd-HHmm}";
             };
 
             using var dlg = new SaveFileDialog

@@ -11,8 +11,6 @@ namespace InspectorsGadget.models
     // Uses composition so any InspectionItem type can be flagged as critical without needing to modify the base class or derived classes
     public sealed class CriticalItem : InspectionItem
     {
-        // private string _flaggedBy = InspectionManager.InspectorName; // Default to current inspector, but can be overridden in constructor
-
         // Holds a reference to the original item that is flagged as critical
         public InspectionItem Source { get; private set; }
         // Additional properties specific to critical items

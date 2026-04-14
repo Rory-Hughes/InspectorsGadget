@@ -47,7 +47,6 @@ namespace InspectorsGadget.models
             get => _inspectedBy;
         }
 
-        public bool IsCritical => RiskLevel >= 8; // Consider items with risk level 8 or higher as critical
         // Auto-Implemented Property for notes
         public string Notes { get; set; } = string.Empty;
 

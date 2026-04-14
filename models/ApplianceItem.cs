@@ -22,18 +22,13 @@ namespace InspectorsGadget.models
             AgeInYears = ageInYears;
             IsOperational = isOperational;
             RiskLevel = CalculateRisk(); // Set risk level based on specific criteria
+            addCritical(RiskLevel, InspectedBy); // Automatically flag as critical if risk is 8 or higher
         }
         // Override the CalculateRisk method to determine risk level based on appliance age and operational status
         public override int CalculateRisk()
         {
             int risk = IsOperational ? 1 : 5; // Base risk level 1 for operational, 5 for non-operational
             if (AgeInYears > 15) risk += 3; // Older appliances increase risk
-            // Automatically flag as critical if risk is 8 or higher
-            if (risk >= 8 && !string.IsNullOrWhiteSpace(InspectedBy))
-            {
-                var critical = FlagCritical(InspectedBy);
-                InspectionManager.AddItem(critical);
-            }
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
         // Override the GenerateSummary method to include specific details about the appliance item
@@ -54,5 +49,20 @@ namespace InspectorsGadget.models
             AddNote(CriticalMsg);
             return new CriticalItem(this, flaggedBy);
         }
+
+        public void addCritical(int riskLevel, string flaggedBy)
+        {
+            if (riskLevel >= 8)
+            {
+                var critical = FlagCritical(flaggedBy);
+                InspectionManager.AddItem(critical);
+            }
+        }
+        /*
+        public override string ToString()
+        {
+            return $"[Appliance] {ItemName} - Risk: {RiskLevel}, Cost: ${RepairCost:F2}";
+        }
+        */
     }
 }

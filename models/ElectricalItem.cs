@@ -23,6 +23,7 @@ namespace InspectorsGadget.models
             AmpRating = ampRating;
             HasGrounding = hasGrounding;
             RiskLevel = CalculateRisk(); // Set risk level based on specific criteria
+            addCritical(RiskLevel, InspectedBy); // Automatically flag as critical if risk is 8 or higher
         }
 
         // Requirement: Abstract Method Implementation + Method Overriding
@@ -32,12 +33,6 @@ namespace InspectorsGadget.models
             int risk = 1; // Base risk level
             if (AmpRating > 25) risk += 3; // Higher amp rating increases risk
             if (!HasGrounding) risk += 4; // Lack of grounding significantly increases risk
-            // Automatically flag as critical if risk is 8 or higher
-            if (risk >= 8 && !string.IsNullOrWhiteSpace(InspectedBy))
-            {
-                var critical = FlagCritical(InspectedBy);
-                InspectionManager.AddItem(critical);
-            }
             return Math.Clamp(risk, 1, 10); // Ensure risk level is between 1 and 10
         }
 
@@ -59,6 +54,15 @@ namespace InspectorsGadget.models
         {
             AddNote(CriticalMsg);
             return new CriticalItem(this, flaggedBy);
+        }
+
+        public void addCritical(int riskLevel, string flaggedBy)
+        {
+            if (riskLevel >= 8)
+            {
+                var critical = FlagCritical(flaggedBy);
+                InspectionManager.AddItem(critical);
+            }
         }
     }
 }
