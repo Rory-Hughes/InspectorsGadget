@@ -32,6 +32,7 @@ namespace InspectorsGadget.forms
         {
             lblError.Visible = false;
 
+            // 
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             string[] found = Directory.GetFiles(appDir, "*.csv");
 
@@ -42,7 +43,7 @@ namespace InspectorsGadget.forms
                     "Please create a new report to get started.";
                 lblError.Visible = true;
                 return;
-            }
+            };
 
             using var dlg = new OpenFileDialog
             {
@@ -58,7 +59,7 @@ namespace InspectorsGadget.forms
                 // Inspector name is not set on load — MainForm title will omit it.
                 DialogResult = DialogResult.OK;
                 Close();
-            }
+            };
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -95,11 +96,8 @@ namespace InspectorsGadget.forms
 
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                MessageBox.Show("Please enter a filename for the new report.",
-                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtFile.Focus();
-                return;
-            }
+                txtFile.Text = $"inspection_{DateTime.Now:yyyy-MM-dd}";
+            };
 
             if (string.IsNullOrWhiteSpace(inspector))
             {
@@ -107,7 +105,7 @@ namespace InspectorsGadget.forms
                     "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtInspector.Focus();
                 return;
-            }
+            };
 
             // Ensure .csv extension.
             if (!fileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))

@@ -93,22 +93,5 @@ namespace InspectorsGadget.helpers
 
         public static void RemoveItem(InspectionItem item) => Items.Remove(item);
 
-        public static void ResetFile(string filePath)
-        {
-            Items.Clear();
-            try
-            {
-                var lines = Items.Select(i => i switch
-                {
-                    ElectricalItem e => $"Electrical,{e.ItemName},{e.RepairCost},{e.RiskLevel},{e.Notes},{e.AmpRating},{e.HasGrounding}",
-                    StructuralItem s => $"Structural,{s.ItemName},{s.RepairCost},{s.RiskLevel},{s.Notes},{s.HasVisibleCracks},{s.HasWaterDamage}",
-                    ApplianceItem a => $"Appliance,{a.ItemName},{a.RepairCost},{a.RiskLevel},{a.Notes},{a.AgeInYears},{a.IsOperational}",
-                    CriticalItem c => $"Critical,{c.Source.ItemName},{c.RepairCost},{c.RiskLevel},{c.Notes},{c.FlaggedBy},{c.FlaggedDate:yyyy-MM-dd}",
-                    _ => throw new InvalidOperationException($"Unknown type: {i.GetType().Name}")
-                });
-                File.WriteAllLines(filePath, lines);
-            }
-            catch (IOException ex) { throw new Exception($"Failed to save: {ex.Message}"); }
-        }
     }
 }
