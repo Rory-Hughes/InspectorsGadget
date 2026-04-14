@@ -11,22 +11,12 @@ namespace InspectorsGadget
     {
         // Tracks the active file so Save, Save As, and Load all stay in sync.
         // Defaults to the original fixed path so existing data is found on startup.
-        private string _currentFilePath;
-
-        public string CurrentFilePath
-        {
-            get => _currentFilePath;
-            private set
-            {
-                _currentFilePath = value;
-            }
-        }
 
         // ── Constructor now receives the path chosen on the startup screen ────
         public MainForm(string filePath)
         {
             InitializeComponent();
-            CurrentFilePath = filePath;
+            InspectionManager.CurrentFilePath = filePath;
             RefreshDashboard();
         }
 
@@ -36,8 +26,8 @@ namespace InspectorsGadget
             try
             {
                 // Load data from file
-                if (File.Exists(CurrentFilePath))
-                    InspectionManager.LoadFromFile(CurrentFilePath);
+               
+                InspectionManager.LoadFromFile(InspectionManager.CurrentFilePath);
 
                 // Calculate metrics
                 decimal totalCost = InspectionManager.GetTotalRepairCost();
@@ -76,7 +66,7 @@ namespace InspectorsGadget
         // Updates the form title to show the name of the currently active file.
         private void UpdateTitleBar()
         {
-            string fileName = Path.GetFileNameWithoutExtension(CurrentFilePath);
+            string fileName = Path.GetFileNameWithoutExtension(InspectionManager.CurrentFilePath);
             this.Text = $"InspectorsGadget — {fileName} | Inspector: {InspectionManager.InspectorName}";
         }
 
@@ -87,7 +77,7 @@ namespace InspectorsGadget
 
         private void BtnAddInspection_Click(object sender, EventArgs e)
         {
-            var addForm = new AddItemForm(CurrentFilePath);
+            var addForm = new AddItemForm(InspectionManager.CurrentFilePath);
             if (addForm.ShowDialog(this) == DialogResult.OK)
             {
                 RefreshDashboard();
@@ -122,7 +112,7 @@ namespace InspectorsGadget
                 return;
             }
 
-            var editForm = new EditItemForm(itemToEdit, CurrentFilePath);
+            var editForm = new EditItemForm(itemToEdit, InspectionManager.CurrentFilePath);
             if (editForm.ShowDialog(this) == DialogResult.OK)
             {
                 RefreshDashboard();
@@ -154,7 +144,7 @@ namespace InspectorsGadget
             if (confirm == DialogResult.Yes)
             {
                 InspectionManager.RemoveItem(itemToRemove);
-                InspectionManager.SaveToFile(CurrentFilePath);
+                InspectionManager.SaveToFile(InspectionManager.CurrentFilePath);
                 RefreshDashboard();
             }
         }
@@ -181,7 +171,7 @@ namespace InspectorsGadget
                 Title = "Open Inspection Report",
                 Filter = "Inspection Reports (*.csv)|*.csv|All Files (*.*)|*.*",
                 DefaultExt = "csv",
-                InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(CurrentFilePath))
+                InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(InspectionManager.CurrentFilePath))
                                    ?? AppDomain.CurrentDomain.BaseDirectory
             };
 
@@ -190,7 +180,7 @@ namespace InspectorsGadget
                 try
                 {
                     // Update the path first — RefreshDashboard reads CurrentFilePath.
-                    CurrentFilePath = dlg.FileName;
+                    InspectionManager.CurrentFilePath = dlg.FileName;
                     RefreshDashboard();
                 }
                 catch (Exception ex)
@@ -208,9 +198,9 @@ namespace InspectorsGadget
         {
             try
             {
-                InspectionManager.SaveToFile(CurrentFilePath);
+                InspectionManager.SaveToFile(InspectionManager.CurrentFilePath);
                 MessageBox.Show(
-                    $"Data saved to:\n{Path.GetFullPath(CurrentFilePath)}",
+                    $"Data saved to:\n{Path.GetFullPath(InspectionManager.CurrentFilePath)}",
                     "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -236,7 +226,7 @@ namespace InspectorsGadget
                 // Suggest a timestamped filename so reports don't accidentally overwrite each other.
                 FileName = $"inspection_{DateTime.Now:yyyy-MM-dd}",
                 // Start the dialog in the folder where the current file lives (or app folder).
-                InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(CurrentFilePath))
+                InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(InspectionManager.CurrentFilePath))
                                    ?? AppDomain.CurrentDomain.BaseDirectory
             };
 
@@ -244,11 +234,11 @@ namespace InspectorsGadget
             {
                 try
                 {
-                    CurrentFilePath = dlg.FileName;
-                    InspectionManager.SaveToFile(CurrentFilePath);
+                    InspectionManager.CurrentFilePath = dlg.FileName;
+                    InspectionManager.SaveToFile(InspectionManager.CurrentFilePath);
                     UpdateTitleBar();
                     MessageBox.Show(
-                        $"Report saved to:\n{CurrentFilePath}",
+                        $"Report saved to:\n{InspectionManager.CurrentFilePath}",
                         "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)

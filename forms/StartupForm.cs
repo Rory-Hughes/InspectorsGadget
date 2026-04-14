@@ -96,8 +96,12 @@ namespace InspectorsGadget.forms
 
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                txtFile.Text = $"inspection_{DateTime.Now:yyyy-MM-dd}";
-            };
+                MessageBox.Show("Please enter a file name.",
+                    "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtFile.Focus();
+                return;
+            }
+            ;
 
             if (string.IsNullOrWhiteSpace(inspector))
             {

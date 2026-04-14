@@ -26,6 +26,10 @@
             txtNotes = new TextBox();
             btnAddItem = new Button();
             btnCancel = new Button();
+            panElectrical = new Panel();
+            chkHasGrounding = new CheckBox();
+            txtAmp = new TextBox();
+            lblAmp = new Label();
             panAppliance = new Panel();
             chkIsOperational = new CheckBox();
             txtAge = new TextBox();
@@ -33,14 +37,10 @@
             panStructural = new Panel();
             chkHasWaterDamage = new CheckBox();
             chkHasVisibleCracks = new CheckBox();
-            panElectrical = new Panel();
-            chkHasGrounding = new CheckBox();
-            txtAmp = new TextBox();
-            lblAmp = new Label();
             panMain.SuspendLayout();
+            panElectrical.SuspendLayout();
             panAppliance.SuspendLayout();
             panStructural.SuspendLayout();
-            panElectrical.SuspendLayout();
             SuspendLayout();
             // 
             // panMain
@@ -56,9 +56,9 @@
             panMain.Controls.Add(txtNotes);
             panMain.Controls.Add(btnAddItem);
             panMain.Controls.Add(btnCancel);
-            panMain.Controls.Add(panElectrical);
             panMain.Controls.Add(panAppliance);
             panMain.Controls.Add(panStructural);
+            panMain.Controls.Add(panElectrical);
             panMain.Dock = DockStyle.Fill;
             panMain.Location = new Point(16, 16);
             panMain.Margin = new Padding(2);
@@ -176,6 +176,46 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
             // 
+            // panElectrical
+            // 
+            panElectrical.AutoScroll = true;
+            panElectrical.Controls.Add(chkHasGrounding);
+            panElectrical.Controls.Add(txtAmp);
+            panElectrical.Controls.Add(lblAmp);
+            panElectrical.Location = new Point(16, 208);
+            panElectrical.Margin = new Padding(2);
+            panElectrical.Name = "panElectrical";
+            panElectrical.Size = new Size(509, 216);
+            panElectrical.TabIndex = 7;
+            panElectrical.Visible = false;
+            // 
+            // chkHasGrounding
+            // 
+            chkHasGrounding.AutoSize = true;
+            chkHasGrounding.Location = new Point(10, 80);
+            chkHasGrounding.Name = "chkHasGrounding";
+            chkHasGrounding.Size = new Size(137, 24);
+            chkHasGrounding.TabIndex = 2;
+            chkHasGrounding.Text = "Has Grounding?";
+            chkHasGrounding.UseVisualStyleBackColor = true;
+            // 
+            // txtAmp
+            // 
+            txtAmp.Location = new Point(10, 35);
+            txtAmp.Name = "txtAmp";
+            txtAmp.Size = new Size(400, 27);
+            txtAmp.TabIndex = 1;
+            // 
+            // lblAmp
+            // 
+            lblAmp.AutoSize = true;
+            lblAmp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAmp.Location = new Point(10, 10);
+            lblAmp.Name = "lblAmp";
+            lblAmp.Size = new Size(97, 20);
+            lblAmp.TabIndex = 0;
+            lblAmp.Text = "Amp Rating:";
+            // 
             // panAppliance
             // 
             panAppliance.AutoScroll = true;
@@ -187,6 +227,7 @@
             panAppliance.Name = "panAppliance";
             panAppliance.Size = new Size(509, 216);
             panAppliance.TabIndex = 6;
+            panAppliance.Visible = false;
             // 
             // chkIsOperational
             // 
@@ -199,7 +240,6 @@
             chkIsOperational.TabIndex = 2;
             chkIsOperational.Text = "Is Operational?";
             chkIsOperational.UseVisualStyleBackColor = true;
-            chkIsOperational.Visible = false;
             // 
             // txtAge
             // 
@@ -250,46 +290,6 @@
             chkHasVisibleCracks.Text = "Has Visible Cracks?";
             chkHasVisibleCracks.UseVisualStyleBackColor = true;
             // 
-            // panElectrical
-            // 
-            panElectrical.AutoScroll = true;
-            panElectrical.Controls.Add(chkHasGrounding);
-            panElectrical.Controls.Add(txtAmp);
-            panElectrical.Controls.Add(lblAmp);
-            panElectrical.Location = new Point(16, 208);
-            panElectrical.Margin = new Padding(2);
-            panElectrical.Name = "panElectrical";
-            panElectrical.Size = new Size(509, 216);
-            panElectrical.TabIndex = 7;
-            panElectrical.Visible = false;
-            // 
-            // chkHasGrounding
-            // 
-            chkHasGrounding.AutoSize = true;
-            chkHasGrounding.Location = new Point(10, 80);
-            chkHasGrounding.Name = "chkHasGrounding";
-            chkHasGrounding.Size = new Size(137, 24);
-            chkHasGrounding.TabIndex = 2;
-            chkHasGrounding.Text = "Has Grounding?";
-            chkHasGrounding.UseVisualStyleBackColor = true;
-            // 
-            // txtAmp
-            // 
-            txtAmp.Location = new Point(10, 35);
-            txtAmp.Name = "txtAmp";
-            txtAmp.Size = new Size(400, 27);
-            txtAmp.TabIndex = 1;
-            // 
-            // lblAmp
-            // 
-            lblAmp.AutoSize = true;
-            lblAmp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAmp.Location = new Point(10, 10);
-            lblAmp.Name = "lblAmp";
-            lblAmp.Size = new Size(97, 20);
-            lblAmp.TabIndex = 0;
-            lblAmp.Text = "Amp Rating:";
-            // 
             // AddItemForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -307,12 +307,12 @@
             Text = "Add Inspection Item";
             panMain.ResumeLayout(false);
             panMain.PerformLayout();
+            panElectrical.ResumeLayout(false);
+            panElectrical.PerformLayout();
             panAppliance.ResumeLayout(false);
             panAppliance.PerformLayout();
             panStructural.ResumeLayout(false);
             panStructural.PerformLayout();
-            panElectrical.ResumeLayout(false);
-            panElectrical.PerformLayout();
             ResumeLayout(false);
         }
 

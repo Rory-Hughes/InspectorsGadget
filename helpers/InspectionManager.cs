@@ -19,6 +19,17 @@ namespace InspectorsGadget.helpers
         /// </summary>
         public static string InspectorName { get; set; }
 
+        private static string _currentFilePath;
+
+        public static string CurrentFilePath
+        {
+            get => _currentFilePath;
+            set
+            {
+                _currentFilePath = value;
+            }
+        }
+
         // public method to add items to the list
         public static void AddItem(InspectionItem item) => Items.Add(item);
 
@@ -74,22 +85,21 @@ namespace InspectorsGadget.helpers
             try
             {
                 Items.Clear();
-                var firstLine = File.ReadLines(filePath).FirstOrDefault();
-                var lineSplit = firstLine.Split(',');
-                InspectorName = lineSplit[7];
                 foreach (var line in File.ReadAllLines(filePath))
-                {
-                    var p = line.Split(',');
-                    InspectionItem item = p[0] switch
                     {
-                        "Electrical" => new ElectricalItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
-                        "Structural" => new StructuralItem(p[1], decimal.Parse(p[2]), bool.Parse(p[5]), bool.Parse(p[6])),
-                        "Appliance" => new ApplianceItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
-                        _ => throw new InvalidDataException($"Unknown item type: {p[0]}")
-                    };
-                    if (!string.IsNullOrWhiteSpace(p[4])) item.AddNote(p[4]);
-                    Items.Add(item);
-                }
+                        var p = line.Split(',');
+                        if (p.Length < 8) continue; // Skip invalid lines
+                        if (p[7] != null && InspectorName == null) InspectorName = p[7]; // Set inspector name from file if available
+                    InspectionItem item = p[0] switch
+                        {
+                            "Electrical" => new ElectricalItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
+                            "Structural" => new StructuralItem(p[1], decimal.Parse(p[2]), bool.Parse(p[5]), bool.Parse(p[6])),
+                            "Appliance" => new ApplianceItem(p[1], decimal.Parse(p[2]), int.Parse(p[5]), bool.Parse(p[6])),
+                            _ => throw new InvalidDataException($"Unknown item type: {p[0]}")
+                        };
+                        if (!string.IsNullOrWhiteSpace(p[4])) item.AddNote(p[4]);
+                        Items.Add(item);
+                    }
             }
             catch (IOException ex) { throw new Exception($"Failed to load: {ex.Message}"); }
         }

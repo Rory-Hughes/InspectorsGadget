@@ -27,6 +27,10 @@ namespace InspectorsGadget.forms
             txtNotes = new TextBox();
             btnSaveItem = new Button();
             btnCancel = new Button();
+            panAppliance = new Panel();
+            chkIsOperational = new CheckBox();
+            txtAge = new TextBox();
+            lblAge = new Label();
             panElectrical = new Panel();
             chkHasGrounding = new CheckBox();
             txtAmp = new TextBox();
@@ -34,14 +38,10 @@ namespace InspectorsGadget.forms
             panStructural = new Panel();
             chkHasWaterDamage = new CheckBox();
             chkHasVisibleCracks = new CheckBox();
-            panAppliance = new Panel();
-            chkIsOperational = new CheckBox();
-            txtAge = new TextBox();
-            lblAge = new Label();
             panMain.SuspendLayout();
+            panAppliance.SuspendLayout();
             panElectrical.SuspendLayout();
             panStructural.SuspendLayout();
-            panAppliance.SuspendLayout();
             SuspendLayout();
             // 
             // panMain
@@ -165,6 +165,48 @@ namespace InspectorsGadget.forms
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
             // 
+            // panAppliance
+            // 
+            panAppliance.AutoScroll = true;
+            panAppliance.Controls.Add(chkIsOperational);
+            panAppliance.Controls.Add(txtAge);
+            panAppliance.Controls.Add(lblAge);
+            panAppliance.Location = new Point(16, 208);
+            panAppliance.Margin = new Padding(2);
+            panAppliance.Name = "panAppliance";
+            panAppliance.Size = new Size(509, 216);
+            panAppliance.TabIndex = 11;
+            panAppliance.Visible = false;
+            // 
+            // chkIsOperational
+            // 
+            chkIsOperational.AutoSize = true;
+            chkIsOperational.Checked = true;
+            chkIsOperational.CheckState = CheckState.Checked;
+            chkIsOperational.Location = new Point(10, 80);
+            chkIsOperational.Name = "chkIsOperational";
+            chkIsOperational.Size = new Size(131, 24);
+            chkIsOperational.TabIndex = 2;
+            chkIsOperational.Text = "Is Operational?";
+            chkIsOperational.UseVisualStyleBackColor = true;
+            // 
+            // txtAge
+            // 
+            txtAge.Location = new Point(10, 35);
+            txtAge.Name = "txtAge";
+            txtAge.Size = new Size(400, 27);
+            txtAge.TabIndex = 1;
+            // 
+            // lblAge
+            // 
+            lblAge.AutoSize = true;
+            lblAge.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAge.Location = new Point(10, 10);
+            lblAge.Name = "lblAge";
+            lblAge.Size = new Size(94, 20);
+            lblAge.TabIndex = 0;
+            lblAge.Text = "Age (Years):";
+            // 
             // panElectrical
             // 
             panElectrical.AutoScroll = true;
@@ -237,48 +279,6 @@ namespace InspectorsGadget.forms
             chkHasVisibleCracks.Text = "Has Visible Cracks?";
             chkHasVisibleCracks.UseVisualStyleBackColor = true;
             // 
-            // panAppliance
-            // 
-            panAppliance.AutoScroll = true;
-            panAppliance.Controls.Add(chkIsOperational);
-            panAppliance.Controls.Add(txtAge);
-            panAppliance.Controls.Add(lblAge);
-            panAppliance.Location = new Point(16, 208);
-            panAppliance.Margin = new Padding(2);
-            panAppliance.Name = "panAppliance";
-            panAppliance.Size = new Size(509, 216);
-            panAppliance.TabIndex = 11;
-            // 
-            // chkIsOperational
-            // 
-            chkIsOperational.AutoSize = true;
-            chkIsOperational.Checked = true;
-            chkIsOperational.CheckState = CheckState.Checked;
-            chkIsOperational.Location = new Point(10, 80);
-            chkIsOperational.Name = "chkIsOperational";
-            chkIsOperational.Size = new Size(131, 24);
-            chkIsOperational.TabIndex = 2;
-            chkIsOperational.Text = "Is Operational?";
-            chkIsOperational.UseVisualStyleBackColor = true;
-            chkIsOperational.Visible = false;
-            // 
-            // txtAge
-            // 
-            txtAge.Location = new Point(10, 35);
-            txtAge.Name = "txtAge";
-            txtAge.Size = new Size(400, 27);
-            txtAge.TabIndex = 1;
-            // 
-            // lblAge
-            // 
-            lblAge.AutoSize = true;
-            lblAge.Font = new System.Drawing.Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAge.Location = new Point(10, 10);
-            lblAge.Name = "lblAge";
-            lblAge.Size = new Size(94, 20);
-            lblAge.TabIndex = 0;
-            lblAge.Text = "Age (Years):";
-            // 
             // EditItemForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -295,12 +295,12 @@ namespace InspectorsGadget.forms
             Text = "Edit Inspection Item";
             panMain.ResumeLayout(false);
             panMain.PerformLayout();
+            panAppliance.ResumeLayout(false);
+            panAppliance.PerformLayout();
             panElectrical.ResumeLayout(false);
             panElectrical.PerformLayout();
             panStructural.ResumeLayout(false);
             panStructural.PerformLayout();
-            panAppliance.ResumeLayout(false);
-            panAppliance.PerformLayout();
             ResumeLayout(false);
         }
 

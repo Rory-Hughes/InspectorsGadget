@@ -25,7 +25,7 @@ namespace InspectorsGadget
         {
             try
             {
-                InspectionManager.LoadFromFile("inspections.csv");
+                InspectionManager.LoadFromFile(InspectionManager.CurrentFilePath);
 
                 StringBuilder report = new StringBuilder();
                 report.AppendLine("═══════════════════════════════════════════════════════");
@@ -67,7 +67,7 @@ namespace InspectorsGadget
                 }
 
                 report.AppendLine("═══════════════════════════════════════════════════════");
-                report.AppendLine("Report prepared by Inspector's Gadget");
+                report.AppendLine($"Report Completed By {InspectionManager.InspectorName}");
                 report.AppendLine("═══════════════════════════════════════════════════════");
 
                 txtReport.Text = report.ToString();
