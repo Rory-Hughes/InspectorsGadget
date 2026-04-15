@@ -27,30 +27,46 @@ namespace InspectorsGadget
             {
                 InspectionManager.LoadFromFile(InspectionManager.CurrentFilePath);
 
+                // ── Header metrics ────────────────────────────────────────────
+                // Items.Count is source items only — CriticalItems are tracked
+                // separately, so costs and counts are never doubled.
+                int itemCount = InspectionManager.Items.Count;
+                decimal totalCost = InspectionManager.GetTotalRepairCost();
+                double avgRisk = InspectionManager.GetPropertyRiskScore();
+                var criticalItems = InspectionManager.GetCriticalItems();
+
                 StringBuilder report = new StringBuilder();
                 report.AppendLine("═══════════════════════════════════════════════════════");
                 report.AppendLine("         PROPERTY INSPECTION REPORT");
                 report.AppendLine("═══════════════════════════════════════════════════════");
-                report.AppendLine($"Generated: { DateTime.Now:yyyy - MM - dd HH: mm: ss}");
-                report.AppendLine($"Total Items Inspected: {InspectionManager.Items.Count}");
-                report.AppendLine($"Total Repair Cost: ${InspectionManager.GetTotalRepairCost():F2}");
-                report.AppendLine($"Average Risk Score: {InspectionManager.GetPropertyRiskScore():F1}/10");
-                report.AppendLine($"Critical Issues: {InspectionManager.GetCriticalItems().Count}");
+                report.AppendLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                report.AppendLine($"Total Items Inspected: {itemCount}");
+                report.AppendLine($"Total Repair Cost: ${totalCost:F2}");
+                report.AppendLine($"Average Risk Score: {avgRisk:F1}/10");
+                report.AppendLine($"Critical Issues: {criticalItems.Count}");
                 report.AppendLine("───────────────────────────────────────────────────────");
+
+                // ── Detailed items ────────────────────────────────────────────
+                // Iterates only source items (Items list) — no CriticalItem
+                // wrappers appear here, so each inspection item has exactly one
+                // listing and repair costs are not double-counted.
                 report.AppendLine("DETAILED ITEMS");
                 report.AppendLine("───────────────────────────────────────────────────────");
 
-                foreach (var item in InspectionManager.GetSortedByRisk().OrderByDescending(i => i.RiskLevel))
+                foreach (var item in InspectionManager.GetSortedByRisk())
                 {
-                    report.AppendLine(item.GenerateSummary());
-                    if (!string.IsNullOrWhiteSpace(item.Notes))
+                    var properties = item.GenerateSummary().Split('|');
+                    for (int i = 0; i < properties.Length; i++)
                     {
-                        report.AppendLine($"  Notes: {item.Notes}");
+                            report.AppendLine($"{properties[i]}");
                     }
-                    report.AppendLine();
+                    if (!string.IsNullOrWhiteSpace(item.Notes))
+                        report.AppendLine($" Notes: {item.Notes}");
+                    report.AppendLine("   ────────────────────────────────   ");
                 }
 
-                var criticalItems = InspectionManager.GetCriticalItems();
+                // ── Critical issues ───────────────────────────────────────────
+                // Comes from the separate CriticalItems list — layout unchanged.
                 if (criticalItems.Count > 0)
                 {
                     report.AppendLine("───────────────────────────────────────────────────────");
@@ -59,10 +75,11 @@ namespace InspectorsGadget
 
                     foreach (var item in criticalItems)
                     {
-                        report.AppendLine($"❌ {item.ItemName} ({item.GetType().Name})");
+                        report.AppendLine($"❌ {item.ItemName} ({item.Source.GetType().Name})");
                         report.AppendLine($"   Risk Level: {item.RiskLevel}/10");
                         report.AppendLine($"   Estimated Cost: ${item.RepairCost:F2}");
-                        report.AppendLine();
+                        report.AppendLine($"   Flagged By: {item.FlaggedBy} on {item.FlaggedDate:yyyy-MM-dd}");
+                        report.AppendLine("   ────────────────────────────────   ");
                     }
                 }
 
@@ -81,12 +98,10 @@ namespace InspectorsGadget
         private void SendReportBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                $"Report successfully sent to client! Email contains { InspectionManager.Items.Count} inspection items.",
+                $"Report successfully sent to client! Email contains {InspectionManager.Items.Count} inspection items.",
                 "Report Sent",
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+                MessageBoxIcon.Information);
         }
     }
 }
-

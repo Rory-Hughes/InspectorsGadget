@@ -34,14 +34,15 @@
             panMain.Location = new Point(16, 16);
             panMain.Margin = new Padding(2);
             panMain.Name = "panMain";
-            panMain.Size = new Size(1361, 905);
+            panMain.Size = new Size(853, 905);
             panMain.TabIndex = 0;
             // 
             // lblHeader
             // 
+            lblHeader.Anchor = AnchorStyles.Top;
             lblHeader.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblHeader.ForeColor = Color.FromArgb(33, 37, 41);
-            lblHeader.Location = new Point(489, 12);
+            lblHeader.Location = new Point(257, 22);
             lblHeader.Margin = new Padding(2, 0, 2, 0);
             lblHeader.Name = "lblHeader";
             lblHeader.Size = new Size(327, 32);
@@ -50,14 +51,14 @@
             // 
             // txtReport
             // 
-            txtReport.Font = new Font("Courier New", 9F);
+            txtReport.Font = new Font("Dubai", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtReport.Location = new Point(16, 56);
             txtReport.Margin = new Padding(2);
             txtReport.Multiline = true;
             txtReport.Name = "txtReport";
             txtReport.ReadOnly = true;
             txtReport.ScrollBars = ScrollBars.Vertical;
-            txtReport.Size = new Size(1312, 780);
+            txtReport.Size = new Size(805, 780);
             txtReport.TabIndex = 1;
             // 
             // btnSendReport
@@ -66,7 +67,7 @@
             btnSendReport.Cursor = Cursors.Hand;
             btnSendReport.FlatStyle = FlatStyle.Flat;
             btnSendReport.ForeColor = Color.White;
-            btnSendReport.Location = new Point(1216, 852);
+            btnSendReport.Location = new Point(709, 852);
             btnSendReport.Margin = new Padding(2);
             btnSendReport.Name = "btnSendReport";
             btnSendReport.Size = new Size(112, 28);
@@ -82,7 +83,7 @@
             btnClose.DialogResult = DialogResult.Cancel;
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(1096, 852);
+            btnClose.Location = new Point(580, 852);
             btnClose.Margin = new Padding(2);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(112, 28);
@@ -95,7 +96,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnClose;
-            ClientSize = new Size(1393, 937);
+            ClientSize = new Size(885, 937);
             Controls.Add(panMain);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(2);

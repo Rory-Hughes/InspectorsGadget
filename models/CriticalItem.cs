@@ -7,9 +7,51 @@ using System.Threading.Tasks;
 
 namespace InspectorsGadget.models
 {
-    // Requirement: Sealed Class - prevents further inheritance
-    // Uses composition so any InspectionItem type can be flagged as critical without needing to modify the base class or derived classes
+
+    // Requirement: Sealed Class
     public sealed class CriticalItem : InspectionItem
+    {
+        public InspectionItem Source { get; private set; }
+        public DateTime FlaggedDate { get; private set; }
+        public string FlaggedBy { get; private set; }
+
+        // Main constructor — used when flagging at runtime.
+        public CriticalItem(InspectionItem source, string flaggedBy)
+            : base(source?.ItemName ?? throw new ArgumentNullException(nameof(source)),
+                   source.RepairCost)
+        {
+            Source = source;
+            FlaggedBy = string.IsNullOrWhiteSpace(flaggedBy)
+                ? throw new ArgumentException("Flagged by cannot be null or empty.")
+                : flaggedBy;
+            FlaggedDate = DateTime.Now;
+            RiskLevel = source.RiskLevel;
+            Notes = source.Notes; // snapshot of user notes only (no CRITICAL message)
+        }
+
+        // Overload used when rehydrating from file — preserves the original flagged date.
+        public CriticalItem(InspectionItem source, string flaggedBy, DateTime flaggedDate)
+            : this(source, flaggedBy)
+        {
+            FlaggedDate = flaggedDate; // override the DateTime.Now set above
+        }
+
+        public override int CalculateRisk() => Source.CalculateRisk();
+
+        public override string GenerateSummary()
+        {
+            return Source.GenerateSummary()
+                + $" | FLAGGED AS CRITICAL by {FlaggedBy} on {FlaggedDate:d}";
+        }
+    }
+}
+
+/*
+
+
+// Requirement: Sealed Class - prevents further inheritance
+// Uses composition so any InspectionItem type can be flagged as critical without needing to modify the base class or derived classes
+public sealed class CriticalItem : InspectionItem
     {
         // Holds a reference to the original item that is flagged as critical
         public InspectionItem Source { get; private set; }
@@ -39,3 +81,4 @@ namespace InspectorsGadget.models
         }
     }
 }
+*/

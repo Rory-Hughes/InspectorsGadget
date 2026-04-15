@@ -224,7 +224,7 @@ namespace InspectorsGadget
                 Filter = "Inspection Reports (*.csv)|*.csv|All Files (*.*)|*.*",
                 DefaultExt = "csv",
                 // Suggest a timestamped filename so reports don't accidentally overwrite each other.
-                FileName = $"inspection_{DateTime.Now:yyyy-MM-dd}",
+                FileName = $"inspection_{DateTime.Now:yyyyMMdd-HHmm}",
                 // Start the dialog in the folder where the current file lives (or app folder).
                 InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(InspectionManager.CurrentFilePath))
                                    ?? AppDomain.CurrentDomain.BaseDirectory

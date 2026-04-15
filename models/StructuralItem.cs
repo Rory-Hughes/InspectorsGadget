@@ -10,9 +10,51 @@ namespace InspectorsGadget.models
 {
     public class StructuralItem : InspectionItem, IReportable
     {
-        // Requirement: Inheritance - StructuralItem inherits from InspectionItem
-        // Requirement: Additional properties specific to StructuralItem
+
         public bool HasVisibleCracks { get; set; }
+        public bool HasWaterDamage { get; set; }
+
+        public StructuralItem(string itemName, decimal repairCost, bool hasVisibleCracks, bool hasWaterDamage)
+            : base(itemName, repairCost)
+        {
+            HasVisibleCracks = hasVisibleCracks;
+            HasWaterDamage = hasWaterDamage;
+            RiskLevel = CalculateRisk();
+        }
+
+        public override int CalculateRisk()
+        {
+            int risk = 1;
+            if (HasVisibleCracks) risk += 4;
+            if (HasWaterDamage) risk += 3;
+
+            // Auto-flag: guard null InspectorName, add to CriticalItems (not Items).
+            if (risk >= 8 && !string.IsNullOrWhiteSpace(base.InspectedBy))
+                InspectionManager.AddCriticalItem(FlagCritical(base.InspectedBy));
+
+            return Math.Clamp(risk, 1, 10);
+        }
+
+        public override string GenerateSummary()
+            => base.GenerateSummary() + $" | Has Visible Cracks: {HasVisibleCracks} | Has Water Damage: {HasWaterDamage}";
+
+        public string GenerateReport()
+            => $"Structural Item Report {GenerateSummary()} Notes: {Notes}";
+
+        public CriticalItem FlagCritical(string flaggedBy)
+        {
+            // NOTE: no AddNote(CriticalMsg) here — source item notes stay clean.
+            return new CriticalItem(this, flaggedBy);
+        }
+    }
+}
+
+
+
+/*
+// Requirement: Inheritance - StructuralItem inherits from InspectionItem
+// Requirement: Additional properties specific to StructuralItem
+public bool HasVisibleCracks { get; set; }
         public bool HasWaterDamage { get; set; }
 
         private string CriticalMsg { get; } = "CRITICAL: Structural integrity at risk! immediate attention required!";
@@ -65,3 +107,4 @@ namespace InspectorsGadget.models
         }
     }
 }
+*/
