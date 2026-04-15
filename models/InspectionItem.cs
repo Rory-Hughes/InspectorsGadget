@@ -28,7 +28,7 @@ namespace InspectorsGadget.models
         public decimal RepairCost
         {
             get => _repairCost;
-            // checking if value is greater than 0, my thinking is obviously you cant have a negative cost, but you could have possibly a cost of zero.
+            // checking if value is greater than 0, my thinking is you cant have a negative cost, but you could have possibly a cost of zero.
             // but in the case of a zero cost repair, that assumes something is an easy fix that practically any one could do in 10 minutes or less with no special tools
             // and some instructions so for this reason im assuming the inspector would just write a note about how to fix it and not assign a cost to it
             // hence why i am treating a zero cost as an invalid value for the repair cost
@@ -39,7 +39,7 @@ namespace InspectorsGadget.models
         {
             get => _riskLevel;
             // when setting the risk level we want to ensure that the value is between 1 and 10, so we use Math.Clamp to restrict the value to this range.
-            protected set => _riskLevel = Math.Clamp(value, 1, 10); // Ensure risk level is between 1 and 10
+            protected set => _riskLevel = Math.Clamp(value, 1, 10);
         }
 
         public string InspectedBy
